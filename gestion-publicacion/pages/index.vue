@@ -17,11 +17,11 @@
           Documentation
         </a>
         <a
-          href="https://github.com/nuxt/nuxt.js"
+          href="info-publicacion"
           target="_blank"
           class="button--grey"
         >
-          GitHub
+          registrar info general de publicacion
         </a>
       </div>
     </div>
