@@ -1,5 +1,14 @@
 # gestion-publicacion
 
+## Descripción del proyecto:
+
+* El módulo 1 consta del registro de autor, también para que el autor pueda registrar su obra y finalmente manejar el estado de evaluación de la obra con el comité y asignar la cita para la revisión final 
+
+## Informacion de los autores:
+* Jheyson Vélez Marín - jheyson.v.m1@gmail.com
+* Maria Fernanda Henao Herrera - mariafernandahenaoherrera@gmail.com
+* Kevin Julian Londoño - kevin110602@gmail.com
+* Manuela
 > modulo 1
 
 ## Build Setup
@@ -104,5 +113,5 @@ Un autor presenta una propuesta de publicación, ante el Sello Editorial, así:
      - Envío de correo con invitación a evaluar. Asignación de tiempos de respuesta.
      - Programación en calendario
 
-     
+
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).

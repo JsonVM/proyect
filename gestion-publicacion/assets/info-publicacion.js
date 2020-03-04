@@ -4,6 +4,7 @@ export default {
         enEdicion: false,
 
           publicacion: {
+            id:"",
             titulo: "",
             autor: "",
             facultad: "",
@@ -14,6 +15,7 @@ export default {
           
         lista_publicaciones: [
           {
+            id:"001",
             titulo: "Geometría",
             autor: "Jason",
             facultad: "Ciencias básicas",
@@ -32,6 +34,7 @@ methods: {
     crearPublicacion() {
       this.lista_publicaciones.push(this.publicacion);
       this.publicacion = {
+        id:"",
         titulo: "",
         autor: "",
         facultad: "",
@@ -57,8 +60,10 @@ methods: {
       let posicion = this.lista_publicaciones.findIndex(
         publicacion => publicacion.titulo == this.publicacion.titulo
       );
+      this.enEdicion = false;
       this.lista_publicaciones.splice(posicion, 1, this.publicacion);
       this.publicacion = {
+        id:"",
         titulo: "",
         autor: "",
         facultad: "",

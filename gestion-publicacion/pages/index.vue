@@ -10,11 +10,11 @@
       </h2>
       <div class="links">
         <a
-          href="https://nuxtjs.org/"
+          href="seguimiento-revision"
           target="_blank"
           class="button--green"
         >
-          Documentation
+          Seguimiento de revision
         </a>
         <a
           href="info-publicacion"
