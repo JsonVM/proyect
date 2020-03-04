@@ -13,11 +13,11 @@
             v-show="true"
           >
             <b-card-body>
-              <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+              <b-form action="javascript:void(0)" @submit="crearPublicacion()">
                 <b-form-group id="input-group-1" label="Titulo:" label-for="titulo">
                   <b-form-input
                     id="titulo"
-                    v-model="form.titulo"
+                    v-model="publicacion.titulo"
                     required
                     placeholder="Ingrese el titulo de la obra"
                   ></b-form-input>
@@ -26,7 +26,7 @@
                 <b-form-group id="input-group-2" label="Autor:" label-for="autor">
                   <b-form-input
                     id="autor"
-                    v-model="form.autor"
+                    v-model="publicacion.autor"
                     required
                     placeholder="Ingrese el nombre del autor"
                   ></b-form-input>
@@ -39,7 +39,7 @@
                 >
                   <b-form-input
                     id="facultad"
-                    v-model="form.facultad"
+                    v-model="publicacion.facultad"
                     required
                     placeholder="Ingrese la facultad a la cual se inscribe"
                   ></b-form-input>
@@ -52,7 +52,7 @@
                 >
                   <b-form-input
                     id="tipo_publicacion"
-                    v-model="form.tipo_publicacion"
+                    v-model="publicacion.tipo_publicacion"
                     required
                     placeholder="Ingrese el tipo de publicacion"
                   ></b-form-input>
@@ -61,7 +61,7 @@
                 <b-form-group id="input-group-5" label="Area a la que pertenece:" label-for="area">
                   <b-form-input
                     id="area"
-                    v-model="form.area"
+                    v-model="publicacion.area"
                     required
                     placeholder="Ingrese el area a la que pertenece"
                   ></b-form-input>
@@ -106,7 +106,7 @@
               >
                 <b-form-input
                   id="reseña_autores"
-                  v-model="form.reseña_autores"
+                  v-model="publicacion.reseña_autores"
                   required
                   placeholder="Reseña de autores"
                 ></b-form-input>
@@ -114,7 +114,7 @@
               <b-form-group id="input-group-7" label="Resumen de la obra:" label-for="resumen_obra">
                 <b-form-input
                   id="resumen_obra"
-                  v-model="form.resumen_obra"
+                  v-model="publicacion.resumen_obra"
                   required
                   placeholder="Aquí se adjunta un pdf con el resumen de la obra"
                 ></b-form-input>
@@ -126,7 +126,7 @@
               >
                 <b-form-input
                   id="aspectos_novedosos"
-                  v-model="form.aspectos_novedosos"
+                  v-model="publicacion.aspectos_novedosos"
                   required
                   placeholder="aspectos novedosos"
                 ></b-form-input>
@@ -138,7 +138,7 @@
               >
                 <b-form-input
                   id="contribucion_area"
-                  v-model="form.contribucion_area"
+                  v-model="publicacion.contribucion_area"
                   required
                   placeholder="Contribucion al estado actual del area"
                 ></b-form-input>
@@ -150,7 +150,7 @@
               >
                 <b-form-input
                   id="publico_objetivo"
-                  v-model="form.publico_objetivo"
+                  v-model="publicacion.publico_objetivo"
                   required
                   placeholder="Publico objetivo"
                 ></b-form-input>
@@ -162,7 +162,7 @@
               >
                 <b-form-input
                   id="ajusta_mision_udem"
-                  v-model="form.ajusta_mision_udem"
+                  v-model="publicacion.ajusta_mision_udem"
                   required
                   placeholder="Forma en que se ajusta a la misión de la udem"
                 ></b-form-input>
@@ -174,7 +174,7 @@
               >
                 <b-form-input
                   id="proyecto_asociado"
-                  v-model="form.proyecto_asociado"
+                  v-model="publicacion.proyecto_asociado"
                   required
                   placeholder="Datos del proyecto al que se asocia"
                 ></b-form-input>
@@ -186,7 +186,7 @@
               >
                 <b-form-input
                   id="observaciones_finales"
-                  v-model="form.observaciones_finales"
+                  v-model="publicacion.observaciones_finales"
                   required
                   placeholder="Observaciones finales"
                 ></b-form-input>

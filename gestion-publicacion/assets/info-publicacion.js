@@ -1,12 +1,15 @@
 export default {
     data() {
         return {
-          form: {
+        enEdicion: false,
+
+          publicacion: {
             titulo: "",
             autor: "",
             facultad: "",
             tipo_publicacion: "",
-            area: ""
+            area: "",
+            acciones: true
           },
           
         lista_publicaciones: [
@@ -48,7 +51,7 @@ methods: {
         publicacion => publicacion.titulo == item.titulo
       );
       this.enEdicion = true;
-      this.estudiante = Object.assign({}, p);
+      this.publicacion = Object.assign({}, p);
     },
     actualizarPublicacion() {
       let posicion = this.lista_publicaciones.findIndex(
