@@ -1,110 +1,203 @@
 <template>
   <div>
-  <b-card
-    title="Informacion General de la publicacion"
-    img-src="https://picsum.photos/600/300/?image=25"
-    img-alt="Image"
-    img-top
-    tag="article"
-    style="max-width: 50rem;"
-    class="mb-2"
-  >
-    <b-card-body>
-  
+    <b-container class="bv-example-row">
+      <b-row>
+        <b-col>
+          <b-card
+            title="Informacion General de la publicacion"
+            img-alt="Image"
+            img-top
+            tag="article"
+            style="max-width: 50rem;"
+            class="mb-2"
+            v-show="true"
+          >
+            <b-card-body>
+              <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+                <b-form-group id="input-group-1" label="Titulo:" label-for="titulo">
+                  <b-form-input
+                    id="titulo"
+                    v-model="form.titulo"
+                    required
+                    placeholder="Ingrese el titulo de la obra"
+                  ></b-form-input>
+                </b-form-group>
 
-    <b-form @submit="onSubmit" @reset="onReset" v-if="show">
-      <b-form-group
-        id="input-group-1"
-        label="Titulo:"
-        label-for="input-1"
-      >
-        <b-form-input
-          id="input-1"
-          v-model="form.email"
-          required
-          placeholder="Ingrese el titulo de la obra"
-        ></b-form-input>
-      </b-form-group>
+                <b-form-group id="input-group-2" label="Autor:" label-for="autor">
+                  <b-form-input
+                    id="autor"
+                    v-model="form.autor"
+                    required
+                    placeholder="Ingrese el nombre del autor"
+                  ></b-form-input>
+                </b-form-group>
 
-      <b-form-group id="input-group-2" label="Autor:" label-for="input-2">
-        <b-form-input
-          id="input-2"
-          v-model="form.name"
-          required
-          placeholder="Ingrese el nombre del autor"
-        ></b-form-input>
-      </b-form-group>
+                <b-form-group
+                  id="input-group-3"
+                  label="Facultad a la cual se inscribe:"
+                  label-for="facultad"
+                >
+                  <b-form-input
+                    id="facultad"
+                    v-model="form.facultad"
+                    required
+                    placeholder="Ingrese la facultad a la cual se inscribe"
+                  ></b-form-input>
+                </b-form-group>
 
-      <b-form-group id="input-group-3" label="Facultad a la cual se inscribe:" label-for="input-3">
-        <b-form-input
-          id="input-3"
-          v-model="form.facultad"
-          required
-          placeholder="Ingrese la facultad a la cual se inscribe"
-        ></b-form-input>
-      </b-form-group>
+                <b-form-group
+                  id="input-group-4"
+                  label="Tipo de publicacion:"
+                  label-for="tipo_publicacion"
+                >
+                  <b-form-input
+                    id="tipo_publicacion"
+                    v-model="form.tipo_publicacion"
+                    required
+                    placeholder="Ingrese el tipo de publicacion"
+                  ></b-form-input>
+                </b-form-group>
 
-      <b-form-group id="input-group-4" label="Tipo de publicacion:" label-for="input-4">
-        <b-form-input
-          id="input-4"
-          v-model="form.tipo_publicacion"
-          required
-          placeholder="Ingrese el tipo de publicacion"
-        ></b-form-input>
-      </b-form-group>
+                <b-form-group id="input-group-5" label="Area a la que pertenece:" label-for="area">
+                  <b-form-input
+                    id="area"
+                    v-model="form.area"
+                    required
+                    placeholder="Ingrese el area a la que pertenece"
+                  ></b-form-input>
+                </b-form-group>
 
-      <b-form-group id="input-group-5" label="Area a la que pertenece:" label-for="input-5">
-        <b-form-input
-          id="input-5"
-          v-model="form.area"
-          required
-          placeholder="Ingrese el area a la que pertenece"
-        ></b-form-input>
-      </b-form-group>
-
-      <b-button type="submit" variant="primary">Submit</b-button>
-      <b-button type="reset" variant="danger">Reset</b-button>
-    </b-form>
-    <b-card class="mt-3" header="Form Data Result">
-      <pre class="m-0">{{ form }}</pre>
-    </b-card>
-    </b-card-body>
-    </b-card>
+                <b-button type="submit" variant="primary" v-if="!enEdicion">Registrar</b-button>
+                <b-button
+                  @click="actualizarPublicacion()"
+                  variant="primary"
+                  v-else
+                >Actualizar datos</b-button>
+              </b-form>
+              <!--
+              <b-card class="mt-3" header="Mostrar datos">
+                <pre class="m-0">{{ form }}</pre>
+              </b-card>
+              -->
+              <b-table striped hover :items="lista_publicaciones">
+                <template v-slot:cell(acciones)="row">
+                  <b-button size="sm" @click="cargarPublicacion(row)" class="mr-2">Modificar</b-button>
+                  <b-button size="sm" @click="eliminarPublicacion(row)" class="mr-2">Eliminar</b-button>
+                </template>
+              </b-table>
+            </b-card-body>
+          </b-card>
+        </b-col>
+        <b-col>
+          <b-card
+            id="card-info-detallada"
+            title="Informacion detallada de la publicacion"
+            img-alt="Image"
+            img-top
+            tag="article"
+            style="max-width: 50rem;"
+            class="mb-2"
+          >
+            <b-card-body>
+              <b-form-group
+                id="input-group-6"
+                label="Reseña de autores:"
+                label-for="reseña_autores"
+              >
+                <b-form-input
+                  id="reseña_autores"
+                  v-model="form.reseña_autores"
+                  required
+                  placeholder="Reseña de autores"
+                ></b-form-input>
+              </b-form-group>
+              <b-form-group id="input-group-7" label="Resumen de la obra:" label-for="resumen_obra">
+                <b-form-input
+                  id="resumen_obra"
+                  v-model="form.resumen_obra"
+                  required
+                  placeholder="Aquí se adjunta un pdf con el resumen de la obra"
+                ></b-form-input>
+              </b-form-group>
+              <b-form-group
+                id="input-group-8"
+                label="Aspectos novedosos:"
+                label-for="aspectos_novedosos"
+              >
+                <b-form-input
+                  id="aspectos_novedosos"
+                  v-model="form.aspectos_novedosos"
+                  required
+                  placeholder="aspectos novedosos"
+                ></b-form-input>
+              </b-form-group>
+              <b-form-group
+                id="input-group-9"
+                label="Contribución al estado actual del area:"
+                label-for="contribucion_area"
+              >
+                <b-form-input
+                  id="contribucion_area"
+                  v-model="form.contribucion_area"
+                  required
+                  placeholder="Contribucion al estado actual del area"
+                ></b-form-input>
+              </b-form-group>
+              <b-form-group
+                id="input-group-10"
+                label="Publico objetivo:"
+                label-for="publico_objetivo"
+              >
+                <b-form-input
+                  id="publico_objetivo"
+                  v-model="form.publico_objetivo"
+                  required
+                  placeholder="Publico objetivo"
+                ></b-form-input>
+              </b-form-group>
+              <b-form-group
+                id="input-group-11"
+                label="Forma en que se ajusta a la misión de la UdeM:"
+                label-for="ajusta_mision_udem"
+              >
+                <b-form-input
+                  id="ajusta_mision_udem"
+                  v-model="form.ajusta_mision_udem"
+                  required
+                  placeholder="Forma en que se ajusta a la misión de la udem"
+                ></b-form-input>
+              </b-form-group>
+              <b-form-group
+                id="input-group-12"
+                label="Datos del proyecto al que se asocia:"
+                label-for="proyecto_asociado"
+              >
+                <b-form-input
+                  id="proyecto_asociado"
+                  v-model="form.proyecto_asociado"
+                  required
+                  placeholder="Datos del proyecto al que se asocia"
+                ></b-form-input>
+              </b-form-group>
+              <b-form-group
+                id="input-group-13"
+                label="Observaciones finales:"
+                label-for="observaciones_finales"
+              >
+                <b-form-input
+                  id="observaciones_finales"
+                  v-model="form.observaciones_finales"
+                  required
+                  placeholder="Observaciones finales"
+                ></b-form-input>
+              </b-form-group>
+            </b-card-body>
+          </b-card>
+        </b-col>
+      </b-row>
+    </b-container>
   </div>
 </template>
 
-<script>
-  export default {
-    data() {
-      return {
-        form: {
-          email: '',
-          name: '',
-          food: null,
-          checked: []
-        },
-        foods: [{ text: 'Select One', value: null }, 'Carrots', 'Beans', 'Tomatoes', 'Corn'],
-        show: true
-      }
-    },
-    methods: {
-      onSubmit(evt) {
-        evt.preventDefault()
-        alert(JSON.stringify(this.form))
-      },
-      onReset(evt) {
-        evt.preventDefault()
-        // Reset our form values
-        this.form.email = ''
-        this.form.name = ''
-        this.form.food = null
-        this.form.checked = []
-        // Trick to reset/clear native browser form validation state
-        this.show = false
-        this.$nextTick(() => {
-          this.show = true
-        })
-      }
-    }
-  }
-</script>
+
+<script src="@/assets/info-publicacion.js"/>
