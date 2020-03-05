@@ -9,7 +9,7 @@
     v-show="true"
   >
     <b-card-body>
-      <b-form action="javascript:void(0)" @submit="actualizarSeguimiento()">
+      <b-form action="javascript:void(0)" @submit="crearSeguimiento()">
         <b-form-group id="in-tarea" label="id_tarea:" label-for="id_tarea">
           <b-form-input id="id_tarea" v-model="seg.tarea" required placeholder="id tarea"></b-form-input>
         </b-form-group>
@@ -37,27 +37,25 @@
         </b-form-group>
 
         <b-button type="submit" variant="primary" v-if="!enEdicion">Registrar</b-button>
-                <b-button
-                  @click="actualizarSeguimiento()"
-                  variant="primary"
-                  v-else
-                >Actualizar datos</b-button>
+        <b-button @click="actualizarSeguimiento()" variant="primary" v-else>Actualizar datos</b-button>
         <b-table striped hover :items="lista_seguimientos">
-            <template v-slot:cell(acciones)="row">
-                <div>
-                <b-container class="bv-example-row">
+          <template v-slot:cell(acciones)="row">
+            <div>
+              <b-button size="sm" @click="cargarSeguimiento(row)" class="mr-2">Modificar</b-button>
+              <b-button size="sm" @click="eliminarSeguimiento(row)" class="mr-2">Eliminar</b-button>
+              <!---<b-container class="bv-example-row">
                 <b-row>
-                <b-col>
+                  <b-col>
                     <b-button size="sm" @click="cargarSeguimiento(row)" class="mr-2">Modificar</b-button>
-                </b-col>
-                <b-col>
+                  </b-col>
+                  <b-col>
                     <b-button size="sm" @click="eliminarSeguimiento(row)" class="mr-2">Eliminar</b-button>
-                </b-col>
+                  </b-col>
                 </b-row>
-                </b-container>
-                </div>
-            </template>
-             </b-table>
+              </b-container>--->
+            </div>
+          </template>
+        </b-table>
       </b-form>
     </b-card-body>
   </b-card>

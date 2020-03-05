@@ -49,17 +49,17 @@ export default {
             this.lista_seguimientos.splice(posicion, 1);
         },
         cargarSeguimiento({ item }) {
-          let p = this.lista_seguimientos.find(
+          let se = this.lista_seguimientos.find(
             seg => seg.tarea == item.tarea
           );
           this.enEdicion = true;
-          this.seg = Object.assign({}, p);
+          this.seg = Object.assign({}, se);
         },
         actualizarSeguimiento() {
-          let seg = this.lista_seguimientos.findIndex(
+          let seg1 = this.lista_seguimientos.findIndex(
             seg => seg.tarea == this.seg.tarea
           );
-          this.lista_seguimientos.splice(seg, 1, this.seg);
+          this.lista_seguimientos.splice(seg1, 1, this.seg);
           this.seg = {
             tarea: "",
             fecha: "",
