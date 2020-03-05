@@ -8,7 +8,7 @@
 * Jheyson Vélez Marín - jheyson.v.m1@gmail.com
 * Maria Fernanda Henao Herrera - mariafernandahenaoherrera@gmail.com
 * Kevin Julian Londoño - kevin110602@gmail.com
-* Manuela
+* Natalia Hernandez - natahdz02@gmail.com 
 > modulo 1
 
 ## Build Setup

@@ -33,12 +33,15 @@ export default {
             ]
 
             , show: true
-        };
+        }
+
+    },
+    mounted() {
+        this.local()
     },
     methods: {
         crearSeguimiento() {
             this.lista_seguimientos.push(this.seg);
-            localStorage.setItem('seguimientos', JSON.stringify(this.lista_seguimientos));
             this.seg = {
                 tarea: "",
                 fecha: "",
@@ -46,12 +49,14 @@ export default {
                 estado: "",
                 acciones: true
             };
+            localStorage.setItem('seguimientos', JSON.stringify(this.lista_seguimientos));
         },
         eliminarSeguimiento({ item }) {
             let posicion = this.lista_seguimientos.findIndex(
                 seg => seg.tarea == item.tarea
             );
             this.lista_seguimientos.splice(posicion, 1);
+            localStorage.setItem('seguimientos', JSON.stringify(this.lista_seguimientos));
         },
         cargarSeguimiento({ item }) {
             let se = this.lista_seguimientos.find(
@@ -59,6 +64,7 @@ export default {
             );
             this.enEdicion = true;
             this.seg = Object.assign({}, se);
+            localStorage.setItem('seguimientos', JSON.stringify(this.lista_seguimientos));
         },
         actualizarSeguimiento() {
             let seg1 = this.lista_seguimientos.findIndex(
@@ -73,23 +79,16 @@ export default {
                 estado: "",
                 acciones: true
             };
+            localStorage.setItem('seguimientos', JSON.stringify(this.lista_seguimientos));
+        },
+        local() {
 
-        }
-    }/*,
-    created(){
-        this.lista_seguimientos = JSON.parse(localStorage.getItem('seguimientos') || '[]')
-    }
-    /*created: function(){
-        if (typeof window !== 'undefined') {
-            var datosLocal = JSON.parse(localStorage.getItem('seguimiento'));
-        }
-
-        if (typeof window !== 'undefined') {
+            var datosLocal = JSON.parse(localStorage.getItem('seguimientos'));
             if (datosLocal === null) {
                 this.lista_seguimientos = [];
             } else {
                 this.lista_seguimientos = datosLocal;
             }
         }
-    }*/
+    },
 };
