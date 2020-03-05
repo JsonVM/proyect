@@ -1,3 +1,7 @@
+/**
+ * Aquì se encuentran los metodos para el crud de la información de la publicación
+ */
+
 export default {
     data() {
         return {

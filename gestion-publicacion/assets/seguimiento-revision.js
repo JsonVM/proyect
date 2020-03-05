@@ -1,3 +1,7 @@
+/**
+ * Aquì se encuentran los metodos para el crud de los seguimientos
+ */
+
 export default {
     data() {
         return {
@@ -34,6 +38,7 @@ export default {
     methods: {
         crearSeguimiento() {
             this.lista_seguimientos.push(this.seg);
+            localStorage.setItem('seguimientos', JSON.stringify(this.lista_seguimientos));
             this.seg = {
                 tarea: "",
                 fecha: "",
@@ -70,8 +75,11 @@ export default {
             };
 
         }
-    }/**,
-    created: function(){
+    }/*,
+    created(){
+        this.lista_seguimientos = JSON.parse(localStorage.getItem('seguimientos') || '[]')
+    }
+    /*created: function(){
         if (typeof window !== 'undefined') {
             var datosLocal = JSON.parse(localStorage.getItem('seguimiento'));
         }
