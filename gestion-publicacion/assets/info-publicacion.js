@@ -59,7 +59,7 @@ export default {
     //elimina una publicacion dado el parametro item que es la fila donde se encuentra
     eliminarPublicacion({ item }) {
       let posicion = this.lista_publicaciones.findIndex(
-        publicacion => publicacion.titulo == item.titulo
+        publicacion => publicacion.id == item.id
       );
       this.lista_publicaciones.splice(posicion, 1);
       localStorage.setItem('info-publicacion', JSON.stringify(this.lista_publicaciones));
@@ -102,7 +102,5 @@ export default {
         this.lista_publicaciones = datosLocal;
       }
     }
-
-
   }
 };

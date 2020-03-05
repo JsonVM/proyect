@@ -14,6 +14,15 @@
           >
             <b-card-body>
               <b-form action="javascript:void(0)" @submit="crearPublicacion()">
+                 <b-form-group id="input-group-2" label="id:" label-for="id">
+                  <b-form-input
+                    id="id"
+                    v-model="publicacion.id"
+                    required
+                    placeholder="Ingrese el id de su obra"
+                  ></b-form-input>
+                </b-form-group>
+
                 <b-form-group id="input-group-1" label="Titulo:" label-for="titulo">
                   <b-form-input
                     id="titulo"

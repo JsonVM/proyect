@@ -9,27 +9,55 @@ export default {
             //se guardan todos los seguimientos nuevos que se ingresan 
             seg: {
                 tarea: "",
+                id: "",
                 fecha: "",
                 comentario: "",
-                estado: "",
+                estado: null,
                 acciones: true
             },
             //se inicializa el array seguimientos para luego guardar todos los seguimientos ahi
             lista_seguimientos: [
                 {
-                    tarea: "001",
+                    tarea: "01",
+                    id: "1",
                     fecha: "04/03/2020",
                     comentario: "Buen trabajo en general",
-                    estado: "Pendiente",
+                    estado: "rechazado",
                     acciones: true
                 },
                 {
-                    tarea: "002",
+                    tarea: "02",
+                    id: "",
                     fecha: "04/03/2020",
                     comentario: "Hay que realizar correcciones ortográficas",
-                    estado: "No aprobado",
+                    estado: "aprobado",
                     acciones: true
                 }
+            ],
+            //esta lista es utilizada para guardar allí los datos que vamos a listar
+            lista_mostrar: [
+                {
+                    id: "",
+                    nombre: "",
+                    estado: "",
+                }
+            ],
+            lista_publicaciones: [
+                {
+                    id: "1",
+                    titulo: "Geometría",
+                    autor: "Jason",
+                    facultad: "Ciencias básicas",
+                    tipo_publicacion: "Cientifica",
+                    area: "Ciencias básicas",
+                    acciones: true
+                }
+            ],
+            estado: [
+                { value: null, text: "Estado", disabled: true },
+                { value: "aprobado", text: "aprobado" },
+                { value: "en proceso", text: "en proceso" },
+                { value: "rechazado", text: "rechazado" }
             ]
 
             , show: true
@@ -41,22 +69,24 @@ export default {
         this.local()
     },
     methods: {
-      //creamos los seguimientos y los añadimos al array
+        //creamos los seguimientos y los añadimos al array
         crearSeguimiento() {
             this.lista_seguimientos.push(this.seg);
             this.seg = {
                 tarea: "",
+                id: "",
                 fecha: "",
                 comentario: "",
-                estado: "",
+                estado: null,
                 acciones: true
             };
             localStorage.setItem('seguimientos', JSON.stringify(this.lista_seguimientos));
+            
         },
         //eliminanos un seguimiento segun el item que se le pase por parametro
         eliminarSeguimiento({ item }) {
             let posicion = this.lista_seguimientos.findIndex(
-                seg => seg.tarea == item.tarea
+                seg => seg.id == item.id
             );
             this.lista_seguimientos.splice(posicion, 1);
             localStorage.setItem('seguimientos', JSON.stringify(this.lista_seguimientos));
@@ -80,9 +110,10 @@ export default {
             this.lista_seguimientos.splice(seg1, 1, this.seg);
             this.seg = {
                 tarea: "",
+                id: "",
                 fecha: "",
                 comentario: "",
-                estado: "",
+                estado: null,
                 acciones: true
             };
             localStorage.setItem('seguimientos', JSON.stringify(this.lista_seguimientos));
@@ -90,11 +121,38 @@ export default {
         //metodo para guardar la lista de seguimientos en el local storage
         local() {
             var datosLocal = JSON.parse(localStorage.getItem('seguimientos'));
+            var datosInfo = JSON.parse(localStorage.getItem('info-publicacion'));
             if (datosLocal === null) {
                 this.lista_seguimientos = [];
             } else {
                 this.lista_seguimientos = datosLocal;
             }
+            //llenamos la lista de publicaciones con la informacion del local storage
+            //para poder recorrerla y compararla con la lista de seguimientos
+            if (datosInfo === null) {
+                this.lista_publicaciones = [];
+            } else {
+                this.lista_publicaciones = datosInfo;
+            }
+        },
+        //metodo para llenar la lista mostrar con el nombre de la obra, el id de la obra y el estado
+        buscar() {
+            for (let index = 0; index < this.lista_seguimientos.length; index++) {
+                for (let j = 0; j < this.lista_seguimientos.length; j++) {
+                    if (this.lista_publicaciones[index].id == this.lista_seguimientos[j].tarea) {
+                        var temp = {
+                            id: this.lista_publicaciones[index].id,
+                            nombre: this.lista_publicaciones[index].titulo,
+                            estado: this.lista_seguimientos[index].estado
+                        }
+                        this.lista_mostrar.push(temp)
+                    }
+                }
+            }
+
         }
-    },
+
+
+    }
+
 };
