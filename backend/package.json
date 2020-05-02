@@ -1,0 +1,16 @@
+{
+  "name": "editorial_modulo_1",
+  "version": "1.0.0",
+  "description": "proyecto editorial UdeM modulo 1",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "JsonVM",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "pg": "^8.0.3"
+  }
+}
