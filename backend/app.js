@@ -12,8 +12,11 @@ app.get("/", (req, res) => {
   });
   
 //ruta con su propio endpoint
-const rutas_index = require('./routes/index')
-app.use(rutas_index);
+const rutas_info_publicacion = require('./routes/info-publicacion')
+app.use(rutas_info_publicacion);
+
+const rutas_seguimientos = require('./routes/seguimiento-publicacion')
+app.use(rutas_seguimientos);
 
   // Puerto
   const port = 3000;
