@@ -27,12 +27,13 @@ let validarSeguimiento = (seguimiento_publicacion) => {
 let guardarSeguimiento = async seguimiento_publicacion => {
     try {
         let _servicio = new servicioPg()
-        let sql = `INSERT INTO public.paginas(
-        url, nombre, descripcion)
+        let sql = `INSERT INTO public.pu_seguimientos_propuestas(
+        id_tarea, fecha, comentario, archivo)
         VALUES (
-            '${pagina.url}',
-            '${pagina.nombre}',
-            '${pagina.descripcion}'
+            '${udem.id_tarea}',
+            '${udem.fecha}',
+            '${udem.comentario}'
+            '${udem.archivo}'
             );`;
         let respuesta = await _servicio.ejecutarSql(sql);
         return respuesta;
@@ -45,7 +46,7 @@ let guardarSeguimiento = async seguimiento_publicacion => {
 let consultarSeguimientos = async () => {
     try {
         let _servicio = new servicioPg()
-        let sql = `SELECT * from seguimiento_publicacion`;
+        let sql = `SELECT * from public.pu_seguimientos_propuestas`;
         let respuesta = await _servicio.ejecutarSql(sql);
         return respuesta;
     } catch (error) {
