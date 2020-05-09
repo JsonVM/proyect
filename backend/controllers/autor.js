@@ -6,48 +6,57 @@
 const servicioPg = require('../services/postgres')
 
 /**
- * Validando la informacion de la publicacion
- * @param {*} info_publicacion pagina en forma de JSON
+ * Validando la informacion del autor
+ * @param {*} autor pagina en forma de JSON
  */
-let validarPublicacion = (info_publicacion) => {
-    if (!info_publicacion) {
+let validarAutor = (autor) => {
+    if (!autor) {
         throw {
-            ok: false, mensaje: "La info de la publicación es obligatoria"
+            ok: false, mensaje: "La info del autor es obligatoria"
         }
     }
 
-    //haciendo obligatorio el titulo de la obra
-    if (!info_publicacion.titulo) {
+    if (!autor.nombre) {
         throw {
-            ok: false, mensaje: "El titulo es obligatorio"
+            ok: false, mensaje: "El nombre es obligatorio"
         }
     }
 
-    //haciendo obligatorio el tipo de publicacion de la obra
-    if (!info_publicacion.tipo_publicacion) {
+    if (!autor.apellidos) {
         throw {
-            ok: false, mensaje: "El tipo de publicacion es obligatorio"
+            ok: false, mensaje: "los apellidos son obligatorios"
         }
     }
 
-    //haciendo obligatoria la facultad a la que se inscribe
-    if (!info_publicacion.facultad) {
+    if (!autor.edad) {
         throw {
-            ok: false, mensaje: "La facultad a la que se inscribe es obligatoria"
+            ok: false, mensaje: "La edad es obligatoria"
         }
     }
 
-    //haciendo obligatoria la info de los autores
-    if (!info_publicacion.autores) {
+
+    if (!autor.correo) {
         throw {
-            ok: false, mensaje: "La info de los autores es obligatoria"
+            ok: false, mensaje: "el correo es obligatoria"
         }
     }
 
-    //haciendo obligatoria el area a la que se inscribe
-    if (!info_publicacion.area) {
+ 
+    if (!autor.ocupacion) {
         throw {
-            ok: false, mensaje: "El area a la que se inscribe es obligatoria"
+            ok: false, mensaje: "la ocupacion es obligatoria"
+        }
+    }
+
+    if (!autor.rol) {
+        throw {
+            ok: false, mensaje: "el rol es obligatoria"
+        }
+    }
+
+    if (!autor.clave) {
+        throw {
+            ok: false, mensaje: "La clave es obligatoria"
         }
     }
 }
@@ -55,28 +64,27 @@ let validarPublicacion = (info_publicacion) => {
 //TERMINAR el query
 
 /**
- * Guardando la publicacion en la base de datos
- * @param {*} info_publicacion datos de lapublicacion en forma de JSON
+ * Guardando el autor en la base de datos
+ * @param {*} autor datos del autor en en forma de JSON
  */
-let guardarPublicacion = async info_publicacion => {
+let guardarAutor = async (autor)=> {
     try {
         let _servicio = new servicioPg()
-        let sql = `INSERT INTO public.pu_autores_publicaciones(
-        titulo, facultad, tipo_publicacion, area, resenia_autores, resumen, aspectos_novedosos,
-        contribucion_area, publico_objetivo, datos_proyecto_asociado, forma_ajusta_mision_udem, observaciones_finales)
+        let sql = `INSERT INTO public.usuarios(
+        nombre, apellidos, edad, correo, ciudad, ocupacion, rol, clave, entidad, afiliacion_institucional, 
+        descripcion)
         VALUES (
-            '${udem.titulo}',
-            '${udem.facultad}',
-            '${udem.tipo_publicacion}'
-            '${udem.area}',
-            '${udem.resenia_autores}',
-            '${udem.resumen}'
-            '${udem.aspectos_novedosos}',
-            '${udem.contribucion_area}',
-            '${udem.publico_objetivo}'
-            '${udem.datos_proyecto_asociado}',
-            '${udem.forma_ajusta_mision_udem}',
-            '${udem.observaciones_finales}'
+            '${autor.nombre}',
+            '${autor.apellidos}',
+            '${autor.edad}'
+            '${autor.correo}',
+            '${autor.ciudad}',
+            '${autor.ocupacion}'
+            '${autor.rol}',
+            '${autor.clave}',
+            '${autor.entidad}'
+            '${autor.afiliacion_institucional}',
+            '${autor.descripcion}',
             );`;
         let respuesta = await _servicio.ejecutarSql(sql);
         return respuesta;
@@ -85,11 +93,11 @@ let guardarPublicacion = async info_publicacion => {
     }
 }
 
-//Consultando la info de las publicaciones
-let consultarPublicaciones = async () => {
+//Consultando la info de los autores
+let consultarAutor = async () => {
     try {
         let _servicio = new servicioPg()
-        let sql = `SELECT * from public.pu_propuestas_publicaciones`;
+        let sql = `SELECT * from public.usuarios`;
         let respuesta = await _servicio.ejecutarSql(sql);
         return respuesta;
     } catch (error) {
@@ -98,4 +106,4 @@ let consultarPublicaciones = async () => {
 }
 
 //exportando metodos en forma de JSON
-module.exports = { validarPublicacion, guardarPublicacion, consultarPublicaciones };
+module.exports = { validarAutor, guardarAutor, consultarAutor};
