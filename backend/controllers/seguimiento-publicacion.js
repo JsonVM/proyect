@@ -26,11 +26,13 @@ let guardarSeguimiento = async (seguimiento_publicacion) => {
     try {
         let _servicio = new servicioPg()
         let sql = `INSERT INTO public.pu_seguimientos_propuestas(
-        id_tarea, fecha, comentario, archivo)
+        id, id_tarea, fecha, comentario, estado, archivo)
         VALUES (
-            '${seguimiento_publicacion.id_tarea}',
+            '${seguimiento_publicacion.id}',
+            '${seguimiento_publicacion.tarea}',
             '${seguimiento_publicacion.fecha}',
-            '${seguimiento_publicacion.comentario}'
+            '${seguimiento_publicacion.comentario}',
+            '${seguimiento_publicacion.estado}',
             '${seguimiento_publicacion.archivo}'
             );`;
         let respuesta = await _servicio.ejecutarSql(sql);

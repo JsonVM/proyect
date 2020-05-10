@@ -27,7 +27,7 @@ router.post("/seguimiento-publicacion", (req, res) => {
     _controlador.validarSeguimiento(info_seguimiento);
 
     // Guardar la pagina en base de datos
-    _controlador.guardarSeguimiento(info_publicacion).then(respuestaDB => {
+    _controlador.guardarSeguimiento(info_seguimiento).then(respuestaDB => {
       res.send({ ok: true, mensaje: "Seguimiento guardado", info: info_seguimiento });
     }).catch(error => {
       res.send(error);
