@@ -10,7 +10,7 @@
       </h2>
       <div class="links">
         <a
-          href="seguimiento-revision"
+          href="seguimiento-publicacion"
           target="_blank"
           class="button--green"
         >

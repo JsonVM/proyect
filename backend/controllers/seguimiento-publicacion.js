@@ -18,8 +18,6 @@ let validarSeguimiento = (seguimiento_publicacion) => {
     }
 }
 
-//TERMINAR el query
-
 /**
  * Guardando El seguimiento en la base de datos
  * @param {*} seguimiento_publicacion datos de la informacion del seguimiento de una publicacion en forma de JSON
