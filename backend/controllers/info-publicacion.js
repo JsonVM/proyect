@@ -7,7 +7,7 @@ const servicioPg = require('../services/postgres')
 
 /**
  * Validando la informacion de la publicacion
- * @param {*} info_publicacion pagina en forma de JSON
+ * @param {*} info_publicacion datos de la publicacion en forma de JSON
  */
 let validarPublicacion = (info_publicacion) => {
     if (!info_publicacion) {
@@ -38,7 +38,7 @@ let validarPublicacion = (info_publicacion) => {
     }
 
     //haciendo obligatoria la info de los autores
-    if (!info_publicacion.autores) {
+    if (!info_publicacion.resenia_autores) {
         throw {
             ok: false, mensaje: "La info de los autores es obligatoria"
         }
@@ -62,18 +62,20 @@ let guardarPublicacion = async (info_publicacion) => {
     try {
         let _servicio = new servicioPg()
         let sql = `INSERT INTO public.pu_propuestas_publicaciones(
+            id,
         titulo, facultad, tipo_publicacion, area, resenia_autores, resumen, aspectos_novedosos,
         contribucion_area, publico_objetivo, datos_proyecto_asociado, forma_ajusta_mision_udem, observaciones_finales)
         VALUES (
+            '${info_publicacion.id}',
             '${info_publicacion.titulo}',
             '${info_publicacion.facultad}',
-            '${info_publicacion.tipo_publicacion}'
+            '${info_publicacion.tipo_publicacion}',
             '${info_publicacion.area}',
             '${info_publicacion.resenia_autores}',
-            '${info_publicacion.resumen}'
+            '${info_publicacion.resumen}',
             '${info_publicacion.aspectos_novedosos}',
             '${info_publicacion.contribucion_area}',
-            '${info_publicacion.publico_objetivo}'
+            '${info_publicacion.publico_objetivo}',
             '${info_publicacion.datos_proyecto_asociado}',
             '${info_publicacion.forma_ajusta_mision_udem}',
             '${info_publicacion.observaciones_finales}'
