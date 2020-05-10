@@ -39,5 +39,20 @@ router.post("/seguimiento-publicacion", (req, res) => {
   }
 });
 
+/**
+ * Eliminar un seguimiento
+ */
+router.delete("/seguimiento-publicacion/:id", (req, res) => {
+  let id = req.params.id;
+  _controlador
+    .eliminarSeguimiento(id)
+    .then((respuestaDB) => {
+      res.send({ ok: true, info: {}, mensaje: "seguimiento de publicacion eliminada correctamente" });
+    })
+    .catch((error) => {
+      res.send(" se daño "+ error);
+    });
+});
+
 
 module.exports = router;
