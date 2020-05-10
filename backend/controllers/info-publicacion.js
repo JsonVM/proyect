@@ -52,8 +52,6 @@ let validarPublicacion = (info_publicacion) => {
     }
 }
 
-//TERMINAR el query
-
 /**
  * Guardando la publicacion en la base de datos
  * @param {*} info_publicacion datos de lapublicacion en forma de JSON
@@ -90,7 +88,7 @@ let guardarPublicacion = async (info_publicacion) => {
 //Consultando la info de las publicaciones
 let consultarPublicaciones = async () => {
     try {
-        let _servicio = new servicioPg()
+        let _servicio = new servicioPg();
         let sql = `SELECT * from public.pu_propuestas_publicaciones`;
         let respuesta = await _servicio.ejecutarSql(sql);
         return respuesta;
@@ -99,5 +97,18 @@ let consultarPublicaciones = async () => {
     }
 }
 
+//Eliminando una publicacion
+let eliminarPublicacion = async (id) => {
+    try{
+        let _servicio = new servicioPg();
+        let sql = `DELETE FROM public.pu_propuestas_publicaciones WHERE id ='${id}'`;
+        let respuesta = await _servicio.ejecutarSql(sql);
+        return respuesta;
+    } catch(error) {
+        throw{ok: false};
+    }
+    
+  };
+
 //exportando metodos en forma de JSON
-module.exports = { validarPublicacion, guardarPublicacion, consultarPublicaciones };
+module.exports = { validarPublicacion, guardarPublicacion, consultarPublicaciones, eliminarPublicacion };

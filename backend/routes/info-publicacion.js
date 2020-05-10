@@ -39,5 +39,21 @@ router.post("/info-publicacion", (req, res) => {
   }
 });
 
+/**
+ * Eliminar una publicacion
+ */
+router.delete("/info-publicacion/:id", (req, res) => {
+  let id = req.params.id;
+  console.log(id);
+  _controlador
+    .eliminarPublicacion(id)
+    .then((respuestaDB) => {
+      res.send({ ok: true, info: {}, mensaje: "Publicacion eliminada correctamente" });
+    })
+    .catch((error) => {
+      res.send(" se daño"+ error);
+    });
+});
+
 
 module.exports = router;
