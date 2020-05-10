@@ -75,7 +75,7 @@ export default {
         //creamos los seguimientos y los añadimos al array
         crearSeguimiento() {
             this.lista_seguimientos.push(this.seg);
-            let direccion = "http://localhost:3000/seguimiento-publicacion";
+            let direccion = "http://localhost:3001/seguimiento-publicacion";
             axios
                 .post(direccion, this.seg)
                 .then((response) => {
