@@ -10,7 +10,7 @@
       </h2>
       <div class="links">
         <a
-          href="seguimiento-revision"
+          href="seguimiento-publicacion"
           target="_blank"
           class="button--green"
         >
@@ -22,6 +22,13 @@
           class="button--grey"
         >
           registrar info general de publicacion
+        </a>
+        <a
+          href="registro-autor"
+          target="_blank"
+          class="button--green"
+        >
+          registrar autor
         </a>
       </div>
     </div>

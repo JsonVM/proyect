@@ -58,15 +58,25 @@ let validarPublicacion = (info_publicacion) => {
  * Guardando la publicacion en la base de datos
  * @param {*} info_publicacion datos de lapublicacion en forma de JSON
  */
-let guardarPublicacion = async info_publicacion => {
+let guardarPublicacion = async (info_publicacion) => {
     try {
         let _servicio = new servicioPg()
-        let sql = `INSERT INTO public.paginas(
-        url, nombre, descripcion)
+        let sql = `INSERT INTO public.pu_propuestas_publicaciones(
+        titulo, facultad, tipo_publicacion, area, resenia_autores, resumen, aspectos_novedosos,
+        contribucion_area, publico_objetivo, datos_proyecto_asociado, forma_ajusta_mision_udem, observaciones_finales)
         VALUES (
-            '${pagina.url}',
-            '${pagina.nombre}',
-            '${pagina.descripcion}'
+            '${info_publicacion.titulo}',
+            '${info_publicacion.facultad}',
+            '${info_publicacion.tipo_publicacion}'
+            '${info_publicacion.area}',
+            '${info_publicacion.resenia_autores}',
+            '${info_publicacion.resumen}'
+            '${info_publicacion.aspectos_novedosos}',
+            '${info_publicacion.contribucion_area}',
+            '${info_publicacion.publico_objetivo}'
+            '${info_publicacion.datos_proyecto_asociado}',
+            '${info_publicacion.forma_ajusta_mision_udem}',
+            '${info_publicacion.observaciones_finales}'
             );`;
         let respuesta = await _servicio.ejecutarSql(sql);
         return respuesta;
@@ -79,7 +89,7 @@ let guardarPublicacion = async info_publicacion => {
 let consultarPublicaciones = async () => {
     try {
         let _servicio = new servicioPg()
-        let sql = `SELECT * from info_publicacion`;
+        let sql = `SELECT * from public.pu_propuestas_publicaciones`;
         let respuesta = await _servicio.ejecutarSql(sql);
         return respuesta;
     } catch (error) {

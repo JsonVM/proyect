@@ -12,6 +12,7 @@ export default {
                 id: "",
                 fecha: "",
                 comentario: "",
+                id_propuesta: "",
                 estado: null,
                 acciones: true
             },
@@ -23,6 +24,7 @@ export default {
                     fecha: "04/03/2020",
                     comentario: "Buen trabajo en general",
                     estado: "rechazado",
+                    id_propuesta:"1",
                     acciones: true
                 },
                 {
@@ -31,6 +33,7 @@ export default {
                     fecha: "04/03/2020",
                     comentario: "Hay que realizar correcciones ortográficas",
                     estado: "aprobado",
+                    id_propuesta:"1",
                     acciones: true
                 }
             ],
@@ -72,14 +75,27 @@ export default {
         //creamos los seguimientos y los añadimos al array
         crearSeguimiento() {
             this.lista_seguimientos.push(this.seg);
+            let direccion = "http://localhost:3000/seguimiento-revision";
+            axios
+                .post(direccion, this.seg)
+                .then((response) => {
+                console.log("Seguimiento agregado correctamente");
+                console.log(response);
+                })
+                .catch((error) => {
+                console.log(error);
+                });
             this.seg = {
                 tarea: "",
                 id: "",
                 fecha: "",
                 comentario: "",
+                id_propuesta: "",
                 estado: null,
                 acciones: true
             };
+            
+            //guardando en el localstorage
             localStorage.setItem('seguimientos', JSON.stringify(this.lista_seguimientos));
             
         },
@@ -89,6 +105,7 @@ export default {
                 seg => seg.id == item.id
             );
             this.lista_seguimientos.splice(posicion, 1);
+            //guardando en el localstorage
             localStorage.setItem('seguimientos', JSON.stringify(this.lista_seguimientos));
         },
         //este metodo nos pone en el formulario todos los datos del seguimiento que quieren editar
@@ -113,6 +130,7 @@ export default {
                 id: "",
                 fecha: "",
                 comentario: "",
+                id_propuesta: "",
                 estado: null,
                 acciones: true
             };
