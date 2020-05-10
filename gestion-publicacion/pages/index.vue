@@ -23,6 +23,13 @@
         >
           registrar info general de publicacion
         </a>
+        <a
+          href="registro-autor"
+          target="_blank"
+          class="button--green"
+        >
+          registrar autor
+        </a>
       </div>
     </div>
   </div>

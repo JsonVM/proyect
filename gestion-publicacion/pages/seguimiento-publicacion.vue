@@ -6,6 +6,7 @@
     tag="article"
     style="max-width: 50rem;"
     class="mb-2"
+    align-self="center"
     v-show="true"
   >
     <b-card-body>
@@ -37,6 +38,15 @@
             v-model="seg.comentario"
             required
             placeholder="Comentarios de la obra"
+          ></b-form-input>
+        </b-form-group>
+
+        <b-form-group id="in-id_propuesta" label="id propuesta:" label-for="id_propuesta">
+          <b-form-input
+            id="id_propuesta"
+            v-model="seg.comentario"
+            required
+            placeholder="id de la propuesta asociada"
           ></b-form-input>
         </b-form-group>
 
@@ -74,4 +84,4 @@
   </b-card>
 </template>
 
-<script src="@/assets/seguimiento-revision.js"/>
+<script src="@/assets/seguimiento-publicacion.js"/>
