@@ -64,17 +64,18 @@ let validarAutor = (autor) => {
 let guardarAutor = async (autor)=> {
     try {
         let _servicio = new servicioPg()
-        let sql = `INSERT INTO public.usuarios(
-            id, nombre, apellidos, edad, correo, ciudad, ocupacion, rol, clave)
+        let sql = `INSERT INTO public.acc_usuarios(
+             id, nombre, apellidos, edad, correo, ciudad, ocupacion, clave, rol)
         VALUES (
+            '${autor.id}',
             '${autor.nombre}',
             '${autor.apellidos}',
-            '${autor.edad}'
+            '${autor.edad}',
             '${autor.correo}',
             '${autor.ciudad}',
-            '${autor.ocupacion}'
-            '${rolautor}',
-            '${autor.clave}'
+            '${autor.ocupacion}',
+            '${autor.clave}',
+            '${autor.rol}'
             );`;
         let respuesta = await _servicio.ejecutarSql(sql);
         return respuesta;
@@ -87,7 +88,7 @@ let guardarAutor = async (autor)=> {
 let consultarAutor = async () => {
     try {
         let _servicio = new servicioPg()
-        let sql = `SELECT * from public.usuarios`;
+        let sql = `SELECT * from public.acc_usuarios`;
         let respuesta = await _servicio.ejecutarSql(sql);
         return respuesta;
     } catch (error) {

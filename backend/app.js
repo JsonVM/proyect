@@ -1,11 +1,14 @@
 //añadiendo express
 const express = require("express");
 const cors = require("cors");
+//node const morgan = requiere("morgan")
+
 
 //inicializar la libreria
 const app = express();
 app.use(express.json());
 app.use(cors());
+//app.use(morgan("dev"))
 
 app.get("/", (req, res) => {
     res.send("Api de proyecto editorial UdeM modulo 1");
