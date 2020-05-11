@@ -92,6 +92,7 @@
                 <template v-slot:cell(acciones)="row">
                   <b-button size="sm" @click="cargarPublicacion(row)" class="mr-2">Modificar</b-button>
                   <b-button size="sm" @click="eliminarPublicacion(row)" class="mr-2">Eliminar</b-button>
+                  <b-button size="sm" @click="eliminarPublicacion(row)" class="mr-2">Generar pdf</b-button>
                 </template>
               </b-table>
             </b-card-body>

@@ -24,7 +24,7 @@ router.post("/info-publicacion", (req, res) => {
     let info_publicacion = req.body;
 
     // Valida la información, sino se envia al catch
-    _controlador.validarPublicacion(info_publicacion);
+    //_controlador.validarPublicacion(info_publicacion);
 
     // Guardar la pagina en base de datos
     _controlador.guardarPublicacion(info_publicacion).then(respuestaDB => {
