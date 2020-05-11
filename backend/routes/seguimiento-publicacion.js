@@ -40,6 +40,25 @@ router.post("/seguimiento-publicacion", (req, res) => {
 });
 
 /**
+ * Modificar una seguimiento
+ */
+router.put("/seguimiento-publicacion/:id", (req, res) => {
+  // Capturar el parámetro de la ruta
+  let id = req.params.id;
+
+  let seg = req.body;
+  console.log(seg);
+  _controlador
+    .modificarSeguimiento(seg, id)
+    .then((respuestaDB) => {
+      res.send({ ok: true, mensaje: "seguimiento ha sido modificado", info: respuestaDB });
+    })
+    .catch((error) => {
+      res.send(error);
+    });
+});
+
+/**
  * Eliminar un seguimiento
  */
 router.delete("/seguimiento-publicacion/:id", (req, res) => {
