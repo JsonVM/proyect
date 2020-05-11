@@ -54,5 +54,46 @@ let consultarSeguimientos = async () => {
     }
 }
 
+//Eliminando un seguimiento publicacion
+let eliminarSeguimiento = async (id) => {
+    try{
+        let _servicio = new servicioPg();
+        let sql = `DELETE FROM public.pu_seguimientos_propuestas WHERE id ='${id}'`;
+        let respuesta = await _servicio.ejecutarSql(sql);
+        return respuesta;
+    } catch(error) {
+        throw{ok: false};
+    }
+    
+  };
+
+  let modificarSeguimiento = async (seguimiento_publicacion, id) => {
+    if (seguimiento_publicacion.id != id) {
+      throw {
+        ok: false,
+        mensaje: "El id del seguimiento no corresponde al enviado.",
+      };
+    }
+    try{
+        let _servicio = new servicioPg();
+        let sql = `UPDATE public.pu_seguimientos_propuestas
+        SET 
+        id_tarea=${seguimiento_publicacion.id_tarea}, 
+        fecha='${seguimiento_publicacion.fecha}',
+        comentario='${seguimiento_publicacion.comentario}',
+        estado='${seguimiento_publicacion.estado}',
+        archivo='${seguimiento_publicacion.archivo}',
+        id_propuesta=${seguimiento_publicacion.id_propuesta}
+        WHERE id=${seguimiento_publicacion.id};`;
+
+        let respuesta = await _servicio.ejecutarSql(sql);
+        return respuesta;
+
+    } catch(error) {
+        throw{ok: false ,
+        err: error}
+    }
+  };
+
 //exportando metodos en forma de JSON
-module.exports = { validarSeguimiento, guardarSeguimiento, consultarSeguimientos };
+module.exports = { validarSeguimiento, guardarSeguimiento, consultarSeguimientos, eliminarSeguimiento, modificarSeguimiento };

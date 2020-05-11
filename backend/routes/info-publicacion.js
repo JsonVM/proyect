@@ -24,7 +24,7 @@ router.post("/info-publicacion", (req, res) => {
     let info_publicacion = req.body;
 
     // Valida la información, sino se envia al catch
-    _controlador.validarPublicacion(info_publicacion);
+    //_controlador.validarPublicacion(info_publicacion);
 
     // Guardar la pagina en base de datos
     _controlador.guardarPublicacion(info_publicacion).then(respuestaDB => {
@@ -39,5 +39,39 @@ router.post("/info-publicacion", (req, res) => {
   }
 });
 
+/**
+ * Eliminar una publicacion
+ */
+router.delete("/info-publicacion/:id", (req, res) => {
+  let id = req.params.id;
+  console.log(id);
+  _controlador
+    .eliminarPublicacion(id)
+    .then((respuestaDB) => {
+      res.send({ ok: true, info: {}, mensaje: "Publicacion eliminada correctamente" });
+    })
+    .catch((error) => {
+      res.send(" se daño"+ error);
+    });
+});
+
+/**
+ * Modificar una publicacion
+ */
+router.put("/info-publicacion/:id", (req, res) => {
+  // Capturar el parámetro de la ruta
+  let id = req.params.id;
+
+  let info_pub = req.body;
+  console.log(info_pub);
+  _controlador
+    .modificarPublicacion(info_pub, id)
+    .then((respuestaDB) => {
+      res.send({ ok: true, mensaje: "la publicacion ha sido modificada", info: respuestaDB });
+    })
+    .catch((error) => {
+      res.send(error);
+    });
+});
 
 module.exports = router;

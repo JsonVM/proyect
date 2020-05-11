@@ -52,8 +52,6 @@ let validarPublicacion = (info_publicacion) => {
     }
 }
 
-//TERMINAR el query
-
 /**
  * Guardando la publicacion en la base de datos
  * @param {*} info_publicacion datos de lapublicacion en forma de JSON
@@ -90,14 +88,62 @@ let guardarPublicacion = async (info_publicacion) => {
 //Consultando la info de las publicaciones
 let consultarPublicaciones = async () => {
     try {
-        let _servicio = new servicioPg()
-        let sql = `SELECT * from public.pu_propuestas_publicaciones`;
+        let _servicio = new servicioPg();
+        let sql = `SELECT titulo, facultad, tipo_publicacion, area from public.pu_propuestas_publicaciones`;
         let respuesta = await _servicio.ejecutarSql(sql);
         return respuesta;
-    } catch (error) {
+    } catch (error) { 
         throw{ok: false };
     }
 }
 
+//Eliminando una publicacion
+let eliminarPublicacion = async (id) => {
+    try{
+        let _servicio = new servicioPg();
+        let sql = `DELETE FROM public.pu_propuestas_publicaciones WHERE id ='${id}'`;
+        let respuesta = await _servicio.ejecutarSql(sql);
+        return respuesta;
+    } catch(error) {
+        throw{ok: false};
+    }
+    
+  };
+
+  let modificarPublicacion = async (info_publicacion, id) => {
+    if (info_publicacion.id != id) {
+        console.log(info_publicacion.id);
+      throw {
+        ok: false,
+        mensaje: "El id de la publicacion no corresponde al enviado.",
+      };
+    }
+    try{
+        let _servicio = new servicioPg();
+        let sql = `UPDATE public.pu_propuestas_publicaciones
+        SET
+        titulo= '${info_publicacion.titulo}',
+        facultad='${info_publicacion.facultad}',
+        tipo_publicacion='${info_publicacion.tipo_publicacion}',
+        area='${info_publicacion.area}',
+        resenia_autores='${info_publicacion.resenia_autores}',
+        resumen='${info_publicacion.resumen}',
+        aspectos_novedosos='${info_publicacion.aspectos_novedosos}',
+        contribucion_area='${info_publicacion.contribucion_area}',
+        publico_objetivo='${info_publicacion.publico_objetivo}',
+        datos_proyecto_asociado='${info_publicacion.datos_proyecto_asociado}',
+        forma_ajusta_mision_udem='${info_publicacion.forma_ajusta_mision_udem}',
+        observaciones_finales='${info_publicacion.observaciones_finales}'
+        WHERE id=${info_publicacion.id};`;
+
+        let respuesta = await _servicio.ejecutarSql(sql);
+        return respuesta;
+
+    } catch(error) {
+        throw{ok: false ,
+        err: error}
+    }
+  };
+
 //exportando metodos en forma de JSON
-module.exports = { validarPublicacion, guardarPublicacion, consultarPublicaciones };
+module.exports = { validarPublicacion, guardarPublicacion, consultarPublicaciones, eliminarPublicacion, modificarPublicacion };

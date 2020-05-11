@@ -69,7 +69,8 @@ export default {
     },
     //aca apenas se carga la pagina se llama el metodo para guardar en el local storage
     mounted() {
-        this.local()
+        //this.local()
+        this.cargar()
     },
     methods: {
         //creamos los seguimientos y los añadimos al array
@@ -117,6 +118,20 @@ export default {
             this.seg = Object.assign({}, se);
             localStorage.setItem('seguimientos', JSON.stringify(this.lista_seguimientos));
         },
+
+        cargar(){
+            let url = "http://localhost:3001/seguimiento-publicacion";
+            axios.get(url).then(respuesta => {
+              let data = respuesta.data
+              if(data.ok){
+                this.lista_seguimientos = data.info
+              }
+              this.mensaje = data.mensaje;
+              console.log(respuesta);
+            }).catch(error => {
+              console.log(this.mensaje = "Ha ocurrido un error")});
+         
+          },
         //estes metodo se llama luego de que se hace un cambio en un seguimiento ya existente,
         //para que quede guardado con sus nuevos valores
         actualizarSeguimiento() {

@@ -1,7 +1,7 @@
 /**
  * Aquì se encuentran los metodos para el crud de la información de la publicación
  */
-
+const axios = require('axios');
 export default {
   data() {
     return {
@@ -23,7 +23,6 @@ export default {
         {
           id: "001",
           titulo: "Geometría",
-          autor: "Jason",
           facultad: "Ciencias básicas",
           tipo_publicacion: "Cientifica",
           area: "Ciencias básicas",
@@ -36,7 +35,8 @@ export default {
   },
   //Para que llame  el metodo local apenas se cargue la funcion
   mounted() {
-    this.local()
+    //this.local()
+    this.cargar()
   },
 
 
@@ -46,10 +46,20 @@ export default {
       this.lista_publicaciones.push(this.publicacion);
       localStorage.setItem('info-publicacion', JSON.stringify(this.lista_publicaciones));
 
+            let direccion = "http://localhost:3001/info-publicacion";
+            axios
+                .post(direccion, this.publicacion)
+                .then((response) => {
+                console.log("Propuesta agregada correctamente");
+                console.log(response);
+                })
+                .catch((error) => {
+                console.log(error);
+                });
+
       this.publicacion = {
         id: "",
         titulo: "",
-        autor: "",
         facultad: "",
         tipo_publicacion: "",
         area: "",
@@ -73,6 +83,20 @@ export default {
       this.enEdicion = true;
       this.publicacion = Object.assign({}, p);
       localStorage.setItem('info-publicacion', JSON.stringify(this.lista_publicaciones));
+    },
+
+    cargar(){
+      let url = "http://localhost:3001/info-publicacion";
+      axios.get(url).then(respuesta => {
+        let data = respuesta.data
+        if(data.ok){
+          this.lista_publicaciones = data.info
+        }
+        this.mensaje = data.mensaje;
+        console.log(respuesta);
+      }).catch(error => {
+        console.log(this.mensaje = "Ha ocurrido un error")});
+   
     },
 
     //Actualiza los datos de una publicacion
