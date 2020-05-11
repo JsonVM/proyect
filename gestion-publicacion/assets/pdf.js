@@ -2,7 +2,6 @@ const puppeteer = require('puppeteer');
 const fs = require('fs-extra');
 const hbs = require('handlebars');
 const path = require('path');
-
 const data = {
     nombre: "yeison",
     apellido: "beles"

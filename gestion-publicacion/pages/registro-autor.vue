@@ -1,58 +1,91 @@
 <template>
 
-    <div class="card" style="width: 30rem;">
-        
-        <div class="card-body">
-          <h5 class="card-title">Registro de autor</h5>
-          <form action="javascript:void(0)" onsubmit="">
-        
-            <div class="form-group">
-                <label for="cedula">Cedula</label>
-                <input type="text" class="form-control" id="url" placeholder="Ingrese su cedula" required>
-            </div>
-    
-            <div class="form-group">
-                <label for="nombre">Nombre</label>
-                <input type="text" class="form-control" id="nombre" placeholder="Ingrese su nombre" required>
-            </div>
-    
-            <div class="form-group">
-                <label for="apellidos">Apellidos</label>
-                <input type="text" class="form-control" id="apellidos" placeholder="Ingrese sus apellidos" required>
-            </div>
+    <b-card-body>
+        <b-form action="javascript:void(0)" @submit="guardarAutor()">
+  
+                <b-form-group id="id" label="Cedula:" label-for="id">
+                <b-form-input
+                    id="id"
+                    v-model="autor.id"
+                    required
+                    placeholder="Cedula"
+                ></b-form-input>
 
-            <div class="form-group">
-                <label for="edad">Edad</label>
-                <input type="text" class="form-control" id="edad" placeholder="Ingrese su edad" required>
-            </div>
+            </b-form-group>
+            <b-form-group id="in-nombre" label="Nombre:" label-for="nombre">
+            <b-form-input
+            id="nombre"
+            v-model="autor.nombre"
+            required
+            placeholder="Ingrese su nombre"
+             ></b-form-input>
+            </b-form-group>
 
-            <div class="form-group">
-                <label for="correo">Correo</label>
-                <input type="email" class="form-control" id="correo" placeholder="Ingrese su correo" required>
-            </div>
+        <b-form-group id="in-apellidos" label="Apellidos:" label-for="apellidos">
+          <b-form-input
+            id="apellidos"
+            v-model="autor.comentario"
+            required
+            placeholder="Ingrese sus apellidos"
+          ></b-form-input>
+        </b-form-group>
 
-            <div class="form-group">
-                <label for="ciudad">Ciudad</label>
-                <input type="text" class="form-control" id="ciudad" placeholder="Ingrese su ciudad" required>
-            </div>
+        <b-form-group id="in-edad" label="Edad:" label-for="edad">
+          <b-form-input
+            id="edad"
+            v-model="autor.edad"
+            required
+            placeholder="Ingrese su edad"
+          ></b-form-input>
+        </b-form-group>
 
-            <div class="form-group">
-                <label for="ocupación">Ocupación</label>
-                <input type="text" class="form-control" id="ocupación" placeholder="Ingrese su ocupación" required>
-            </div>
-    
-            <div class="form-group">
-                <label for="contraseña">Contraseña</label>
-                <input type="password" class="form-control" id="contraseña" placeholder="Ingrese su contreña" required>
-            </div>
+        <b-form-group id="in-correo" label="Correo:" label-for="correo">
+          <b-form-input
+            id="correo"
+            v-model="autor.correo"
+            required
+            placeholder="Ingrese su correo"
+          ></b-form-input>
+        </b-form-group>
 
-            <input id="btncrearBookmark" class="btn btn-primary" type="submit" value="Registrarse">
-        </form>
-        </div>
-      </div>
+        <b-form-group id="in-ciudad" label="Ciudad:" label-for="ciudad">
+          <b-form-input
+            id="ciudad"
+            v-model="autor.ciudad"
+            required
+            placeholder="Ingrese su ciudad"
+          ></b-form-input>
+        </b-form-group>
+
+        <b-form-group id="in-ocupacion" label="Ocupación:" label-for="ocupacion">
+          <b-form-input
+            id="ocupacion"
+            v-model="autor.ocupacion"
+            required
+            placeholder="Ingrese su ocupacion"
+          ></b-form-input>
+        </b-form-group>
+
+         <b-form-group id="in-clave" label="Clave:" label-for="clave">
+          <b-form-input
+            id="clave"
+            v-model="autor.clave"
+            required
+            placeholder="Ingrese su clave"
+          ></b-form-input>
+        </b-form-group>
+      </b-form>
+
+        <b-button type="submit" variant="primary" v-if="!enEdicion">Registrar</b-button>
+                </b-card-body>
           </template>
         </b-table>
       </b-form>
     </b-card-body>
+    </b-table>
+      </b-form>
+    
+
   </b-card>
 </template>
+<script src="../../gestion-publicacion/assets/registro-autor.js"/>
