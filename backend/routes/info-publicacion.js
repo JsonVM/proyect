@@ -55,5 +55,23 @@ router.delete("/info-publicacion/:id", (req, res) => {
     });
 });
 
+/**
+ * Modificar una publicacion
+ */
+router.put("/info-publicacion/:id", (req, res) => {
+  // Capturar el parámetro de la ruta
+  let id = req.params.id;
+
+  let info_pub = req.body;
+  console.log(info_pub);
+  _controlador
+    .modificarPublicacion(info_pub, id)
+    .then((respuestaDB) => {
+      res.send({ ok: true, mensaje: "la publicacion ha sido modificada", info: respuestaDB });
+    })
+    .catch((error) => {
+      res.send(error);
+    });
+});
 
 module.exports = router;
