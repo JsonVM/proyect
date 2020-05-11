@@ -4,7 +4,7 @@
 
 //importar el servicion de postgres
 const servicioPg = require('../services/postgres')
-const rolautor;
+
 /**
  * Validando la informacion del autor
  * @param {*} autor pagina en forma de JSON
@@ -74,7 +74,7 @@ let guardarAutor = async (autor)=> {
             '${autor.correo}',
             '${autor.ciudad}',
             '${autor.ocupacion}',
-            '${autor.clave}',
+            md5('${autor.clave}'),
             '${autor.rol}'
             );`;
         let respuesta = await _servicio.ejecutarSql(sql);
@@ -97,4 +97,4 @@ let consultarAutor = async () => {
 }
 
 //exportando metodos en forma de JSON
-module.exports = { validarAutor, guardarAutor, consultarAutor};
+module.exports = {validarAutor, guardarAutor, consultarAutor};

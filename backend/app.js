@@ -21,6 +21,9 @@ app.use(rutas_info_publicacion);
 const rutas_seguimientos = require('./routes/seguimiento-publicacion')
 app.use(rutas_seguimientos);
 
+const rutas_registro = require('./routes/registro-autor')
+app.use(rutas_registro);
+
   // Puerto
   const port = 3001;
   // Levantar el servidor para escuchar los puertos
