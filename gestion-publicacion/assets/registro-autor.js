@@ -17,24 +17,25 @@ export default {
                 ciudad: "",
                 ocupacion: "",
                 clave: "",
-                rol: "6",
+                rol: 6,
                 acciones: true
             },
             //se inicializa el array autores para luego guardar todos los seguimientos ahí
             lista_autores: [
                 {
-                    id: "100",
+                id: "100",
                 nombre: "asd",
                 apellidos: "asd",
-                edad: "2",
+                edad: "",
                 correo: "asd@gmail.com",
                 ciudad: "asd",
                 ocupacion: "asd",
                 clave: "asd",
-                rol: "6",
+                rol: 6,
                 acciones: true
                 }
             ],
+             show: true
             
         }
 
@@ -42,16 +43,32 @@ export default {
     methods: {
         guardarAutor() {
             let direccion = "http://localhost:3001/registro-autor";
+            console.log(this.autor)
             axios
                 .post(direccion, this.autor)
                 .then((response) => {
+                    console.log(this.autor) 
                 console.log("Autor agregado correctamente");
                 console.log(response);
+                
+                this.autor = {
+                    id: "",
+                    nombre: "",
+                    apellidos: "",
+                    edad: "",
+                    correo: "",
+                    ciudad: "",
+                    ocupacion: "",
+                    clave: "",
+                    rol: 6,
+                    acciones: true
+                  };
+
                 })
                 .catch((error) => {
                 console.log(error);
                 });
-        
+
         },
     }
 
