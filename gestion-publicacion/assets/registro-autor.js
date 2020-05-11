@@ -50,7 +50,11 @@ export default {
                     console.log(this.autor) 
                 console.log("Autor agregado correctamente");
                 console.log(response);
-                
+
+                })
+                .catch((error) => {
+                console.log(error);
+                });
                 this.autor = {
                     id: "",
                     nombre: "",
@@ -63,11 +67,6 @@ export default {
                     rol: 6,
                     acciones: true
                   };
-
-                })
-                .catch((error) => {
-                console.log(error);
-                });
 
         },
     }
