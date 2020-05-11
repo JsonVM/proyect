@@ -4,7 +4,7 @@
 
 //importar el servicion de postgres
 const servicioPg = require('../services/postgres')
-
+const rolautor;
 /**
  * Validando la informacion del autor
  * @param {*} autor pagina en forma de JSON
@@ -48,12 +48,6 @@ let validarAutor = (autor) => {
         }
     }
 
-    if (!autor.rol) {
-        throw {
-            ok: false, mensaje: "el rol es obligatoria"
-        }
-    }
-
     if (!autor.clave) {
         throw {
             ok: false, mensaje: "La clave es obligatoria"
@@ -71,8 +65,7 @@ let guardarAutor = async (autor)=> {
     try {
         let _servicio = new servicioPg()
         let sql = `INSERT INTO public.usuarios(
-        nombre, apellidos, edad, correo, ciudad, ocupacion, rol, clave, entidad, afiliacion_institucional, 
-        descripcion)
+            id, nombre, apellidos, edad, correo, ciudad, ocupacion, rol, clave)
         VALUES (
             '${autor.nombre}',
             '${autor.apellidos}',
@@ -80,11 +73,8 @@ let guardarAutor = async (autor)=> {
             '${autor.correo}',
             '${autor.ciudad}',
             '${autor.ocupacion}'
-            '${autor.rol}',
-            '${autor.clave}',
-            '${autor.entidad}'
-            '${autor.afiliacion_institucional}',
-            '${autor.descripcion}',
+            '${rolautor}',
+            '${autor.clave}'
             );`;
         let respuesta = await _servicio.ejecutarSql(sql);
         return respuesta;
