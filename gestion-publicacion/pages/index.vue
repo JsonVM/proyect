@@ -3,7 +3,7 @@
     <div>
       <logo />
       <h1 class="title">
-        gestion-publicacion
+        Gestion de publicación
       </h1>
       <h2 class="subtitle">
         modulo 1
@@ -21,14 +21,14 @@
           target="_blank"
           class="button--grey"
         >
-          registrar info general de publicacion
+         Registrar info de publicacion
         </a>
         <a
           href="registro-autor"
           target="_blank"
           class="button--green"
         >
-          registrar autor
+          Registrar autor
         </a>
       </div>
     </div>
