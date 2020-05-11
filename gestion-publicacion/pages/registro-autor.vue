@@ -1,5 +1,4 @@
 <template>
-  <body>
 
     <div class="card" style="width: 30rem;">
         
@@ -47,7 +46,7 @@
                 <input type="password" class="form-control" id="contraseña" placeholder="Ingrese su contreña" required>
             </div>
 
-            <input id="btncrearBookmark" class="btn btn-primary" type="submit" value="Agregar Bookmark">
+            <input id="btncrearBookmark" class="btn btn-primary" type="submit" value="Registrarse">
         </form>
         </div>
       </div>
