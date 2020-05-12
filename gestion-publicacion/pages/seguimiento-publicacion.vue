@@ -89,7 +89,7 @@
       <b-form action="javascript:void(0)" @submit="eliminarSeguimiento()">
         <b-form-group
           id="in-id_eliminar"
-          label="id del seguimiento a eliminar eliminar:"
+          label="id a eliminar:"
           label-for="id_eliminar"
         >
           <b-form-input
@@ -102,6 +102,24 @@
         <b-button type="submit" variant="primary">Eliminar</b-button
         >
       </b-form>
+
+      <b-form action="javascript:void(0)" @submit="actualizarSeguimiento()">
+        <b-form-group
+          id="in-id_actualizar"
+          label="id a actualizar:"
+          label-for="id_actualizar"
+        >
+          <b-form-input
+            id="id_actualizar"
+            v-model="id_actualizar"
+            required
+            placeholder="id de seguimiento a actualizar"
+          ></b-form-input>
+        </b-form-group>
+        <b-button type="submit" variant="primary">Actualizar</b-button
+        >
+      </b-form>
+
     </b-card-body>
   </b-card>
 </template>

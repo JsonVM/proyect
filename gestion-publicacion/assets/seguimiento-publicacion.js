@@ -118,10 +118,28 @@ export default {
                 });
         },
         //este metodo nos pone en el formulario todos los datos del seguimiento que quieren editar
-        cargarSeguimiento({ item }) {
-            let se = this.lista_seguimientos.find(
+        cargarSeguimiento() {
+            enEdicion = true;
+            
+            let url = "http://localhost:3001/seguimiento-publicacion/";
+            axios.get(url).then(respuesta => {
+              let data = respuesta.data;
+              let lista = data.info;
+              let l = [];
+
+              if(data.ok){
+                this.lista_seguimientos = lista;
+              }
+              this.mensaje = data.mensaje;
+              console.log(respuesta);
+            }).catch(error => {
+              console.log(this.mensaje = "Ha ocurrido un error")});
+         
+
+            /*let se = this.lista_seguimientos.find(
                 seg => seg.tarea == item.tarea
-            );
+            );*/
+
             this.enEdicion = true;
             this.seg = Object.assign({}, se);
             localStorage.setItem('seguimientos', JSON.stringify(this.lista_seguimientos));
@@ -179,24 +197,6 @@ export default {
                 this.lista_publicaciones = datosInfo;
             }
         },
-        //metodo para llenar la lista mostrar con el nombre de la obra, el id de la obra y el estado
-        buscar() {
-            for (let index = 0; index < this.lista_seguimientos.length; index++) {
-                for (let j = 0; j < this.lista_seguimientos.length; j++) {
-                    if (this.lista_publicaciones[index].id == this.lista_seguimientos[j].tarea) {
-                        var temp = {
-                            id: this.lista_publicaciones[index].id,
-                            nombre: this.lista_publicaciones[index].titulo,
-                            estado: this.lista_seguimientos[index].estado
-                        }
-                        this.lista_mostrar.push(temp)
-                    }
-                }
-            }
-
-        }
-
-
     }
 
 };
