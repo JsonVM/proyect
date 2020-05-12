@@ -73,7 +73,8 @@
         <b-button @click="actualizarSeguimiento()" variant="primary" v-else
           >Actualizar datos</b-button
         >
-        <b-table striped hover :items="lista_seguimientos" :fields="fields">
+        <b-table responsive hover :items="lista_seguimientos" :fields="fields"  head-variant="dark"
+        class="border border-danger text-center" >
           <template v-slot:cell(acciones)="row">
             <div>
               <b-button size="sm" @click="cargarSeguimiento(row)" class="mr-2"
