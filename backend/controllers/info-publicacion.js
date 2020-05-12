@@ -107,7 +107,7 @@ let consultarPublicacion = async (id) => {
   try {
       console.log(id);
     let _servicio = new servicioPg();
-    let sql = `SELECT * FROM public.pu_propuestas_publicaciones WHERE id = '${id}';`;
+    let sql = `SELECT * FROM public.pu_propuestas_publicaciones WHERE id='${id}';`;
     let respuesta = await _servicio.ejecutarSql(sql);
     //let resultado = respuesta.rows;
     return respuesta;
