@@ -9,6 +9,7 @@ export default {
 
             //Variable que guarda el id que se quiere eliminar
             id_eliminar: 0,
+            id_actualizar: 0,
             //se guardan todos los seguimientos nuevos que se ingresan 
             seg: {
                 tarea: "",
@@ -59,6 +60,7 @@ export default {
                     acciones: true
                 }
             ],
+            fields:["id","id_tarea","fecha","comentario","estado","archivo","id_propuesta","acciones"],
             estado: [
                 { value: null, text: "Estado", disabled: true },
                 { value: "aprobado", text: "aprobado" },
@@ -104,7 +106,13 @@ export default {
             
         },
         //eliminanos un seguimiento segun el id que se le pase por parametro
-        eliminarSeguimiento() {
+        eliminarSeguimiento({item}) {
+            console.log(item.id);
+            let i = item.id;
+            console.log("id: " + i)
+            //this.seg= this.lista_seguimientos[i];
+            //console.log(this.seg);
+            //this.id_eliminar = this.lista_seguimientos[item].id;
             let direccion = "http://localhost:3001/seguimiento-publicacion/"+this.id_eliminar;
             console.log(this.id_eliminar)
             axios
