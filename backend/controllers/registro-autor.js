@@ -77,6 +77,7 @@ let guardarAutor = async (autor)=> {
             md5('${autor.clave}'),
             '${autor.rol}'
             );`;
+            console.log(this.sql)
         let respuesta = await _servicio.ejecutarSql(sql);
         return respuesta;
     } catch (error) {

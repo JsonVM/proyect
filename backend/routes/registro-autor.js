@@ -29,6 +29,7 @@ router.post("/registro-autor", (req, res) => {
     // Guardar el autor en base de datos
     _controlador.guardarAutor(autor).then(respuestaDB => {
       res.send({ok: true, mensaje: "autor guardado", info: autor});
+      console.log("Hola")
     }).catch(error => {
       res.send(error.response);
     });

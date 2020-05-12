@@ -6,7 +6,7 @@ export default {
   data() {
     return {
       enEdicion: false,
-
+      id_publicacion_a_cargar:0,
       //en este json se almacena la información agregada de las publicaciones(obraas)
       publicacion: {
         id: "",
@@ -97,6 +97,21 @@ export default {
       }).catch(error => {
         console.log(this.mensaje = "Ha ocurrido un error")});
    
+    },
+
+    cargarUnaPublicacion(){
+      let url = "http://localhost:3001/info-publicacion/"+id_publicacion_a_cargar;
+      axios.get(url).then(respuesta => {
+        let data = respuesta.data;
+        if(data.ok){
+          let pub = data.info;
+          generarPdf(pub);
+        }
+        this.mensaje = data.mensaje;
+        console.log(respuesta);
+
+      }).catch(error => {
+        console.log(this.mensaje = "Ha ocurrido un error")});
     },
 
     //Actualiza los datos de una publicacion

@@ -188,6 +188,22 @@
                   <b-button size="sm" @click="eliminarPublicacion(row)" class="mr-2">Generar pdf</b-button>
                 </template>
               </b-table>
+
+              <b-form action="javascript:void(0)" @submit="cargarUnaPublicacion()">
+              <b-form-group
+                id="in-id_publicacion_a_cargar"
+                label="id_publicacion_a_cargar"
+                label-for="id_publicacion_a_cargar"
+              >
+                <b-form-input
+                  id="id_publicacion_a_cargar"
+                  v-model="id_publicacion_a_cargar"
+                  required
+                  placeholder="id de publicacion a obtener"
+                ></b-form-input>
+              </b-form-group>
+              <b-button type="submit" variant="primary">Generar PDF</b-button>
+            </b-form>
             </b-card-body>
           </b-card>
         </b-col>

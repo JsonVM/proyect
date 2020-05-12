@@ -16,6 +16,21 @@ router.get("/seguimiento-publicacion", (req, res) => {
 });
 
 /**
+ * Obteniendo un seguimiento
+ */
+router.get("/seguimiento-publicacion/:id", (req, res) => {
+
+  let id = req.params.id;
+  let seg = req.body;
+  _controlador.consultarSeguimientos().then(respuestaDB => {
+      let registros = respuestaDB.rows;
+      res.send({ ok: true, info: registros, mensaje: "seguimientos consultados" });
+    }).catch(error => {
+      res.send(error);
+    });
+});
+
+/**
  * Guardando un seguimiento
  */
 router.post("/seguimiento-publicacion", (req, res) => {
