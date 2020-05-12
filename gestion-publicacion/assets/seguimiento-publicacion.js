@@ -6,6 +6,9 @@ export default {
     data() {
         return {
             enEdicion: false,
+
+            //Variable que guarda el id que se quiere eliminar
+            id_eliminar: 0,
             //se guardan todos los seguimientos nuevos que se ingresan 
             seg: {
                 tarea: "",
@@ -42,7 +45,7 @@ export default {
                 {
                     id: "",
                     nombre: "",
-                    estado: "",
+                    estado: ""
                 }
             ],
             lista_publicaciones: [
@@ -100,14 +103,19 @@ export default {
             localStorage.setItem('seguimientos', JSON.stringify(this.lista_seguimientos));
             
         },
-        //eliminanos un seguimiento segun el item que se le pase por parametro
-        eliminarSeguimiento({ item }) {
-            let posicion = this.lista_seguimientos.findIndex(
-                seg => seg.id == item.id
-            );
-            this.lista_seguimientos.splice(posicion, 1);
-            //guardando en el localstorage
-            localStorage.setItem('seguimientos', JSON.stringify(this.lista_seguimientos));
+        //eliminanos un seguimiento segun el id que se le pase por parametro
+        eliminarSeguimiento() {
+            let direccion = "http://localhost:3001/seguimiento-publicacion/"+this.id_eliminar;
+            console.log(this.id_eliminar)
+            axios
+                .delete(direccion, this.id_eliminar)
+                .then((response) => {
+                console.log("Seguimiento eliminado");
+                console.log(response);
+                })
+                .catch((error) => {
+                console.log(error);
+                });
         },
         //este metodo nos pone en el formulario todos los datos del seguimiento que quieren editar
         cargarSeguimiento({ item }) {
@@ -122,9 +130,12 @@ export default {
         cargar(){
             let url = "http://localhost:3001/seguimiento-publicacion";
             axios.get(url).then(respuesta => {
-              let data = respuesta.data
+              let data = respuesta.data;
+              let lista = data.info;
+              let l = [];
+
               if(data.ok){
-                this.lista_seguimientos = data.info
+                this.lista_seguimientos = lista;
               }
               this.mensaje = data.mensaje;
               console.log(respuesta);
