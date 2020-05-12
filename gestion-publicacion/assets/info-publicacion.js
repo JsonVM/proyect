@@ -6,7 +6,7 @@ export default {
   data() {
     return {
       enEdicion: false,
-      id_publicacion_a_cargar:0,
+      id_publicacion_a_cargar: 0,
       //en este json se almacena la información agregada de las publicaciones(obraas)
       publicacion: {
         id: "",
@@ -17,6 +17,7 @@ export default {
         area: "",
         acciones: true
       },
+      fields: ["id", "titulo", "facultad", "tipo_publicacion", "area", "acciones"],
 
       //En este arreglo se meten todas las publicaciones
       lista_publicaciones: [
@@ -28,8 +29,23 @@ export default {
           area: "Ciencias básicas",
           acciones: true
         }
-      ]
+      ],
 
+      facultad: [
+        { value: null, text: "Facultad", disabled: true },
+        { value: "ciencias basicas", text: "ciencias basicas" },
+        { value: "ingenieria", text: "ingenieria" },
+        { value: "ciencias sociales", text: "ciencias sociales" },
+        { value: "ciencias humanas", text: "ciencias sociales" }
+      ],
+
+      area: [
+        { value: null, text: "Área", disabled: true },
+        { value: "Matematicas", text: "Matemáticas" },
+        { value: "Fisica", text: "Física" },
+        { value: "Desarrollo web", text: "Desarrollo web" },
+        { value: "derecho", text: "derecho" }
+      ]
       , show: true
     }
   },
@@ -46,16 +62,16 @@ export default {
       this.lista_publicaciones.push(this.publicacion);
       localStorage.setItem('info-publicacion', JSON.stringify(this.lista_publicaciones));
 
-            let direccion = "http://localhost:3001/info-publicacion";
-            axios
-                .post(direccion, this.publicacion)
-                .then((response) => {
-                console.log("Propuesta agregada correctamente");
-                console.log(response);
-                })
-                .catch((error) => {
-                console.log(error);
-                });
+      let direccion = "http://localhost:3001/info-publicacion";
+      axios
+        .post(direccion, this.publicacion)
+        .then((response) => {
+          console.log("Propuesta agregada correctamente");
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
 
       this.publicacion = {
         id: "",
@@ -75,35 +91,28 @@ export default {
       localStorage.setItem('info-publicacion', JSON.stringify(this.lista_publicaciones));
     },
 
-    //Al llamar este metodo carga los datos de una publicacion seleccionada en los campos de texto para editar
-    cargarPublicacion({ item }) {
-      let p = this.lista_publicaciones.find(
-        publicacion => publicacion.titulo == item.titulo
-      );
-      this.enEdicion = true;
-      this.publicacion = Object.assign({}, p);
-      localStorage.setItem('info-publicacion', JSON.stringify(this.lista_publicaciones));
-    },
-
-    cargar(){
+    //cargar todos los registros de la BD y listarlos
+    cargar() {
       let url = "http://localhost:3001/info-publicacion";
       axios.get(url).then(respuesta => {
         let data = respuesta.data
-        if(data.ok){
+        if (data.ok) {
           this.lista_publicaciones = data.info
         }
         this.mensaje = data.mensaje;
         console.log(respuesta);
       }).catch(error => {
-        console.log(this.mensaje = "Ha ocurrido un error")});
-   
+        console.log(this.mensaje = "Ha ocurrido un error")
+      });
+
     },
 
-    cargarUnaPublicacion(){
-      let url = "http://localhost:3001/info-publicacion/"+id_publicacion_a_cargar;
+    //cargar una publicacion especifica de la BD para editarla
+    cargarUnaPublicacion() {
+      let url = "http://localhost:3001/info-publicacion/" + id_publicacion_a_cargar;
       axios.get(url).then(respuesta => {
         let data = respuesta.data;
-        if(data.ok){
+        if (data.ok) {
           let pub = data.info;
           generarPdf(pub);
         }
@@ -111,7 +120,41 @@ export default {
         console.log(respuesta);
 
       }).catch(error => {
-        console.log(this.mensaje = "Ha ocurrido un error")});
+        console.log(this.mensaje = "Ha ocurrido un error")
+      });
+    },
+
+    //cargar una publicacion para editarla 
+    cargarPublicacionEditar({ item }) {
+     let editar = this.lista_publicaciones.find(publicacion => publicacion.id = item.id);
+      this.enEdicion = true;
+      this.publicacion = Object.assign({}, editar);
+      console.log({item})
+      console.log(this.publicacion)
+    },
+
+    //agregar los nuevos valores a la publicacion editada
+    editarPublicacion() {
+      let id_Editar = publicacion.id;
+      let direccion = "http://localhost:3001/info-publicacion" + this.id_Editar;
+      axios
+        .put(direccion, this.publicacion)
+        .then((response) => {
+          console.log("Propuesta editada correctamente");
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
+      this.publicacion = {
+        id: "",
+        titulo: "",
+        facultad: "",
+        tipo_publicacion: "",
+        area: "",
+        acciones: true
+      };
     },
 
     //Actualiza los datos de una publicacion
@@ -131,6 +174,21 @@ export default {
         acciones: true
       };
       localStorage.setItem('info-publicacion', JSON.stringify(this.lista_publicaciones));
+    },
+
+    //eliminar publicacion de la BD
+    eliminarPublicacion() {
+      let direccion = "http://localhost:3001/seguimiento-publicacion/" + this.id_eliminar;
+      console.log(this.id_eliminar)
+      axios
+        .delete(direccion, this.id_eliminar)
+        .then((response) => {
+          console.log("Seguimiento eliminado");
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
     //Para cargar los datos del localstorage en nuestro arreglo de publicaciones
     local() {

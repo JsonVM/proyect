@@ -94,7 +94,7 @@ let guardarPublicacion = async (info_publicacion) => {
 let consultarPublicaciones = async () => {
   try {
     let _servicio = new servicioPg();
-    let sql = `SELECT titulo, facultad, tipo_publicacion, area from public.pu_propuestas_publicaciones`;
+    let sql = `SELECT * from public.pu_propuestas_publicaciones`;
     let respuesta = await _servicio.ejecutarSql(sql);
     return respuesta;
   } catch (error) {
