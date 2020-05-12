@@ -1,3 +1,5 @@
+import { ToastPlugin } from 'bootstrap-vue';
+
 /**
  * Aquì se encuentran los metodos para el crud de los seguimientos
  */
@@ -72,13 +74,14 @@ export default {
         }
 
     },
-    //aca apenas se carga la pagina se llama el metodo para guardar en el local storage
+    //aca apenas se carga la pagina se llama el metodo para listar los seguimientos
     mounted() {
         //this.local()
         this.cargar()
     },
     methods: {
-        //creamos los seguimientos y los añadimos al array
+
+        //creamos los seguimientosy lo agregamos a la BD
         crearSeguimiento() {
             this.lista_seguimientos.push(this.seg);
             let direccion = "http://localhost:3001/seguimiento-publicacion";
@@ -86,6 +89,7 @@ export default {
                 .post(direccion, this.seg)
                 .then((response) => {
                 console.log("Seguimiento agregado correctamente");
+                alert("El seguimiento se creo correctamente");
                 console.log(response);
                 })
                 .catch((error) => {
@@ -105,6 +109,47 @@ export default {
             localStorage.setItem('seguimientos', JSON.stringify(this.lista_seguimientos));
             
         },
+
+        //cargar el seguimiento que quiere editar
+        cargarSeguimientoEditar({ item }) {
+            console.log(this.item)
+            let editar = this.lista_seguimientos.find(seg => seg.id == item.id);
+            this.enEdicion = true;
+            console.log(this.editar)
+            this.seg = Object.assign({}, editar);
+            console.log(this.seg)
+        },
+
+        //editar un seguimiento especifico
+        actualizarSeguimientoBD() {
+            let id_Editar = this.seg.id;
+            console.log(this.seg)
+            let direccion = "http://localhost:3001/seguimiento-publicacion/" + id_Editar;
+            axios
+              .put(direccion, this.seg)
+              .then((response) => {
+                console.log("Seguimiento editado correctamente");
+                alert("El seguimiento se edito correctamente");
+                console.log("hola")
+                console.log(response);
+              })
+              .catch((error) => {
+                console.log(error);
+                alert("Lo sentimos, el seguimiento no se pudo editar correctamente");
+              });
+      
+            this.seg = {
+                tarea: "",
+                id: "",
+                fecha: "",
+                comentario: "",
+                id_propuesta: "",
+                estado: null,
+                acciones: true
+            };
+          },
+      
+       
         //eliminanos un seguimiento segun el id que se le pase por parametro
         eliminarSeguimiento({item}) {
             console.log(item.id);
@@ -113,7 +158,7 @@ export default {
             //this.seg= this.lista_seguimientos[i];
             //console.log(this.seg);
             //this.id_eliminar = this.lista_seguimientos[item].id;
-            let direccion = "http://localhost:3001/seguimiento-publicacion/"+this.id_eliminar;
+            let direccion = "http://localhost:3001/seguimiento-publicacion/" + id_eliminar;
             console.log(this.id_eliminar)
             axios
                 .delete(direccion, this.id_eliminar)

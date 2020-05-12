@@ -49,7 +49,7 @@ export default {
       , show: true
     }
   },
-  //Para que llame  el metodo local apenas se cargue la funcion
+  //Para que llame  el metodo cargar y se listan las publicaciones que hay en la BD
   mounted() {
     //this.local()
     this.cargar()
@@ -57,7 +57,7 @@ export default {
 
 
   methods: {
-    //Para crear una nueva publicacion
+    //Para crear una nueva publicaciony agregarla a la BD
     crearPublicacion() {
       this.lista_publicaciones.push(this.publicacion);
       localStorage.setItem('info-publicacion', JSON.stringify(this.lista_publicaciones));
@@ -67,10 +67,12 @@ export default {
         .post(direccion, this.publicacion)
         .then((response) => {
           console.log("Propuesta agregada correctamente");
+          alert("la propuesta se agrego correctamente");
           console.log(response);
         })
         .catch((error) => {
           console.log(error);
+          alert("Lo sentimos la propuesta no se pudo agregar correctamente");
         });
 
       this.publicacion = {
@@ -81,14 +83,6 @@ export default {
         area: "",
         acciones: true
       };
-    },
-    //elimina una publicacion dado el parametro item que es la fila donde se encuentra
-    eliminarPublicacion({ item }) {
-      let posicion = this.lista_publicaciones.findIndex(
-        publicacion => publicacion.id == item.id
-      );
-      this.lista_publicaciones.splice(posicion, 1);
-      localStorage.setItem('info-publicacion', JSON.stringify(this.lista_publicaciones));
     },
 
     //cargar todos los registros de la BD y listarlos
@@ -107,44 +101,28 @@ export default {
 
     },
 
-    //cargar una publicacion especifica de la BD para editarla
-    cargarUnaPublicacion() {
-      let url = "http://localhost:3001/info-publicacion/" + id_publicacion_a_cargar;
-      axios.get(url).then(respuesta => {
-        let data = respuesta.data;
-        if (data.ok) {
-          let pub = data.info;
-          generarPdf(pub);
-        }
-        this.mensaje = data.mensaje;
-        console.log(respuesta);
-
-      }).catch(error => {
-        console.log(this.mensaje = "Ha ocurrido un error")
-      });
-    },
-
     //cargar una publicacion para editarla 
     cargarPublicacionEditar({ item }) {
-     let editar = this.lista_publicaciones.find(publicacion => publicacion.id = item.id);
+     let editar = this.lista_publicaciones.find(publicacion => publicacion.id == item.id);
       this.enEdicion = true;
       this.publicacion = Object.assign({}, editar);
-      console.log({item})
-      console.log(this.publicacion)
     },
 
     //agregar los nuevos valores a la publicacion editada
-    editarPublicacion() {
-      let id_Editar = publicacion.id;
-      let direccion = "http://localhost:3001/info-publicacion" + this.id_Editar;
+    actualizarPublicacionBD() {
+      let id_Editar = this.publicacion.id;
+      console.log(this.id_editar)
+      let direccion = "http://localhost:3001/info-publicacion/" + id_Editar;
       axios
         .put(direccion, this.publicacion)
         .then((response) => {
           console.log("Propuesta editada correctamente");
+          alert("La propuesta se edito correctamente");
           console.log(response);
         })
         .catch((error) => {
           console.log(error);
+          alert("Lo sentimos, la publicacion no se pudo editar correctamente");
         });
 
       this.publicacion = {

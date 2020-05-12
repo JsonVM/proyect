@@ -169,7 +169,7 @@
                 </b-form-group>
 
                 <b-button type="submit" variant="primary" v-if="!enEdicion">Registrar</b-button>
-                <b-button @click="actualizarPublicacion()" variant="primary" v-else>Actualizar datos</b-button>
+                <b-button @click="actualizarPublicacionBD()" variant="primary" v-else>Actualizar datos</b-button>
               </b-form>
               <!--
               <b-card class="mt-3" header="Mostrar datos">

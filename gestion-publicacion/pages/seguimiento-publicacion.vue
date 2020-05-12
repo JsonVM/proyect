@@ -14,8 +14,8 @@
         <b-form-group id="in-tarea" label="id_tarea:" label-for="id_tarea">
           <b-form-input
             id="id_tarea"
-            v-model="seg.tarea"
-            required
+            v-model="seg.id_tarea"
+            
             placeholder="id tarea"
           ></b-form-input>
         </b-form-group>
@@ -23,7 +23,7 @@
           <b-form-input
             id="id"
             v-model="seg.id"
-            required
+            
             placeholder="id"
           ></b-form-input>
         </b-form-group>
@@ -32,7 +32,7 @@
           <b-form-input
             id="fecha"
             v-model="seg.fecha"
-            required
+            
             placeholder="Ingrese la fecha DD/MM/AAAA"
           ></b-form-input>
         </b-form-group>
@@ -45,7 +45,7 @@
           <b-form-input
             id="comentario"
             v-model="seg.comentario"
-            required
+            
             placeholder="Comentarios de la obra"
           ></b-form-input>
         </b-form-group>
@@ -57,8 +57,8 @@
         >
           <b-form-input
             id="id_propuesta"
-            v-model="seg.comentario"
-            required
+            v-model="seg.id_propuesta"
+         
             placeholder="id de la propuesta asociada"
           ></b-form-input>
         </b-form-group>
@@ -70,14 +70,14 @@
         <b-button type="submit" variant="primary" v-if="!enEdicion"
           >Registrar</b-button
         >
-        <b-button @click="actualizarSeguimiento()" variant="primary" v-else
+        <b-button @click="actualizarSeguimientoBD()" variant="primary" v-else
           >Actualizar datos</b-button
         >
         <b-table responsive hover :items="lista_seguimientos" :fields="fields"  head-variant="dark"
         class="border border-danger text-center" >
           <template v-slot:cell(acciones)="row">
             <div>
-              <b-button size="sm" @click="cargarSeguimiento(row)" class="mr-2"
+              <b-button size="sm" @click="cargarSeguimientoEditar(row)" class="mr-2"
                 >Modificar</b-button
               >
               <b-button size="sm" @click="eliminarSeguimiento(row)" class="mr-2"
