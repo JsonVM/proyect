@@ -168,15 +168,15 @@
                   ></b-form-input>
                 </b-form-group>
 
-                <b-button type="submit" variant="primary" v-if="!enEdicion">Registrar</b-button>
-                <b-button @click="actualizarPublicacionBD()" variant="primary" v-else>Actualizar datos</b-button>
+                <b-button type="submit" variant="danger" v-if="!enEdicion">Registrar</b-button>
+                <b-button @click="actualizarPublicacionBD()" variant="danger" v-else>Actualizar datos</b-button>
               </b-form>
               <!--
               <b-card class="mt-3" header="Mostrar datos">
                 <pre class="m-0">{{ form }}</pre>
               </b-card>
               -->
-              <b-table striped hover :items="lista_publicaciones" :fields="fields">
+              <b-table responsive hover :items="lista_publicaciones" :fields="fields" head-variant="dark">
                 <template v-slot:cell(acciones)="row">
                   <b-button size="sm" @click="cargarPublicacionEditar(row)" class="mr-2">Modificar</b-button>
                   <b-button size="sm" @click="eliminarPublicacion(row)" class="mr-2">Eliminar</b-button>

@@ -155,13 +155,15 @@ export default {
     },
 
     //eliminar publicacion de la BD
-    eliminarPublicacion() {
-      let direccion = "http://localhost:3001/seguimiento-publicacion/" + this.id_eliminar;
-      console.log(this.id_eliminar)
+    eliminarPublicacion({item}) {
+      let i = item.id;
+      let direccion = "http://localhost:3001/info-publicacion/" + i;
       axios
-        .delete(direccion, this.id_eliminar)
+        .delete(direccion, i)
         .then((response) => {
-          console.log("Seguimiento eliminado");
+          console.log("publicacion eliminada correctamente");
+          alert("Publicacion eliminada correctamente");
+          this.cargar();
           console.log(response);
         })
         .catch((error) => {
