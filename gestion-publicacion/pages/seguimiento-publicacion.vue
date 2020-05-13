@@ -63,14 +63,27 @@
           ></b-form-input>
         </b-form-group>
 
+        <b-form-group
+          id="in-archivo"
+          label="archivo:"
+          label-for="archivo"
+        >
+          <b-form-input
+            id="archivo"
+            v-model="seg.archivo"
+         
+            placeholder="Adjuntar archivo"
+          ></b-form-input>
+        </b-form-group>
+
         <b-form-group>
           <b-form-select v-model="seg.estado" :options="estado"></b-form-select>
         </b-form-group>
 
-        <b-button type="submit" variant="primary" v-if="!enEdicion"
+        <b-button type="submit" variant="danger" v-if="!enEdicion"
           >Registrar</b-button
         >
-        <b-button @click="actualizarSeguimientoBD()" variant="primary" v-else
+        <b-button @click="actualizarSeguimientoBD()" variant="danger" v-else
           >Actualizar datos</b-button
         >
         <b-table responsive hover :items="lista_seguimientos" :fields="fields"  head-variant="dark"

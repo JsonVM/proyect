@@ -20,6 +20,7 @@ export default {
                 comentario: "",
                 id_propuesta: "",
                 estado: null,
+                archivo:"",
                 acciones: true
             },
             //se inicializa el array seguimientos para luego guardar todos los seguimientos ahi
@@ -64,7 +65,6 @@ export default {
             ],
             fields:["id","id_tarea","fecha","comentario","estado","archivo","id_propuesta","acciones"],
             estado: [
-                { value: null, text: "Estado", disabled: true },
                 { value: "aprobado", text: "aprobado" },
                 { value: "en proceso", text: "en proceso" },
                 { value: "rechazado", text: "rechazado" }
@@ -89,7 +89,7 @@ export default {
                 .post(direccion, this.seg)
                 .then((response) => {
                 console.log("Seguimiento agregado correctamente");
-                alert("El seguimiento se creo correctamente");
+                alert("El seguimiento se registró correctamente");
                 console.log(response);
                 })
                 .catch((error) => {
@@ -102,6 +102,7 @@ export default {
                 comentario: "",
                 id_propuesta: "",
                 estado: null,
+                archivo: "",
                 acciones: true
             };
             
@@ -130,7 +131,6 @@ export default {
               .then((response) => {
                 console.log("Seguimiento editado correctamente");
                 alert("El seguimiento se edito correctamente");
-                console.log("hola")
                 console.log(response);
               })
               .catch((error) => {
@@ -145,6 +145,7 @@ export default {
                 comentario: "",
                 id_propuesta: "",
                 estado: null,
+                archivo:"",
                 acciones: true
             };
           },
@@ -152,18 +153,14 @@ export default {
        
         //eliminanos un seguimiento segun el id que se le pase por parametro
         eliminarSeguimiento({item}) {
-            console.log(item.id);
             let i = item.id;
-            console.log("id: " + i)
-            //this.seg= this.lista_seguimientos[i];
-            //console.log(this.seg);
-            //this.id_eliminar = this.lista_seguimientos[item].id;
-            let direccion = "http://localhost:3001/seguimiento-publicacion/" + id_eliminar;
-            console.log(this.id_eliminar)
+            let direccion = "http://localhost:3001/seguimiento-publicacion/" + i;
             axios
-                .delete(direccion, this.id_eliminar)
+                .delete(direccion,i)
                 .then((response) => {
                 console.log("Seguimiento eliminado");
+                alert("Seguimiento eliminado correctamente");
+                this.cargar();
                 console.log(response);
                 })
                 .catch((error) => {
@@ -229,9 +226,10 @@ export default {
                 comentario: "",
                 id_propuesta: "",
                 estado: null,
+                archivo:"",
                 acciones: true
             };
-            localStorage.setItem('seguimientos', JSON.stringify(this.lista_seguimientos));
+            //localStorage.setItem('seguimientos', JSON.stringify(this.lista_seguimientos));
         },
         //metodo para guardar la lista de seguimientos en el local storage
         local() {
