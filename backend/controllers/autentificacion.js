@@ -49,9 +49,31 @@ let verificarToken = (token) => {
   return jwt.verify(token, SECRET_KEY);
 };
 
+let verificarAut = (req, res) => {
+  try {
+      let tipo = req.query
+      console.log(tipo['tipo'])
+      let token = req.headers.token;
+      let autenticacion = new _Autenticacion(req.body, tipo['tipo']);
+      let verificacion = autenticacion.verificarToken(token);
+      res.status(200).send({
+          ok: true,
+          info: verificacion,
+          mensaje: "Autenticado.",
+      });
+  } catch (error) {
+      res.status(401).send({
+          ok: false,
+          info: error,
+          mensaje: "No autenticado.",
+      });
+  }
+}
+
 module.exports = {
   validarLogin,
   consultarPersona,
   generarToken,
   verificarToken,
+  verificarAut,
 };
