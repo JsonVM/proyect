@@ -1,79 +1,44 @@
+
 <template>
-  <div class="container">
-    <div>
-      <logo />
-      <h1 class="title">
-        Gestion de publicación
-      </h1>
-      <h2 class="subtitle">
-        modulo 1
-      </h2>
-      <div class="links">
-        <a
-          href="seguimiento-publicacion"
-          target="_blank"
-          class="button--green"
-        >
-          Seguimiento de revision
-        </a>
-        <a
-          href="info-publicacion"
-          target="_blank"
-          class="button--grey"
-        >
-         Registrar info de publicacion
-        </a>
-        <a
-          href="registro-autor"
-          target="_blank"
-          class="button--green"
-        >
-          Registrar autor
-        </a>
-      </div>
-    </div>
-  </div>
+  <b-row align="center" justify="center">
+    <b-col cols="12" sm="8" md="4">
+      <!--Card login -->
+      <b-card class="elevation-12">
+        <b-card-title primary-title></b-card-title>
+
+          <span>Iniciar sesión</span>
+
+        <b-form ref="formularioLogin">
+  
+                <b-form-group id="id" label="Identificación" label-for="Identificacion">
+                <b-form-input
+                    id="documento"
+                    v-model="autor.documento"
+                    required
+                    placeholder="Cedula"
+                    :rules="reglas"
+                ></b-form-input>
+
+            </b-form-group>
+            <b-form-group id="in-nombre" label="Contraseña:" label-for="Contraseña">
+            <b-form-input
+            id="clave"
+            v-model="autor.clave"
+            type="password"
+            required
+            placeholder="Ingrese su contraseña"
+            :rules="reglas"></b-form-input>
+            </b-form-group> 
+
+          
+          <span class="red--text py-2">{{ mensaje }}</span>
+          </b-form>
+        
+          
+          <b-btn color="primary" class="text-none" @click="login()">Ingresar</b-btn>
+          <b-btn color="primary" class="text-none" href="registrar-autor">Registrarse</b-btn>       
+      </b-card>
+    </b-col>
+  </b-row>
 </template>
-
-<script>
-import Logo from '~/components/Logo.vue'
-
-export default {
-  components: {
-    Logo
-  }
-}
-</script>
-
-<style>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-}
-</style>
+<script src="../assets/login.js"/>

@@ -26,10 +26,9 @@ let guardarSeguimiento = async (seguimiento_publicacion) => {
     try {
         let _servicio = new servicioPg()
         let sql = `INSERT INTO public.pu_seguimientos_propuestas(
-        id, id_tarea, fecha, comentario, estado, archivo)
+        id, fecha, comentario, estado, archivo)
         VALUES (
             '${seguimiento_publicacion.id}',
-            '${seguimiento_publicacion.tarea}',
             '${seguimiento_publicacion.fecha}',
             '${seguimiento_publicacion.comentario}',
             '${seguimiento_publicacion.estado}',
@@ -77,8 +76,7 @@ let eliminarSeguimiento = async (id) => {
     try{
         let _servicio = new servicioPg();
         let sql = `UPDATE public.pu_seguimientos_propuestas
-        SET 
-        id_tarea=${seguimiento_publicacion.id_tarea}, 
+        SET     
         fecha='${seguimiento_publicacion.fecha}',
         comentario='${seguimiento_publicacion.comentario}',
         estado='${seguimiento_publicacion.estado}',

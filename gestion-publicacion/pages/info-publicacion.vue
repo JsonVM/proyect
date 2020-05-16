@@ -92,6 +92,7 @@
                     id="resumen_obra"
                     v-model="publicacion.resumen_obra"
                     required
+                    type="text"
                     placeholder="Aquí se adjunta un pdf con el resumen de la obra"
                   ></b-form-input>
                 </b-form-group>
@@ -104,6 +105,7 @@
                     id="aspectos_novedosos"
                     v-model="publicacion.aspectos_novedosos"
                     required
+                    type="text"
                     placeholder="aspectos novedosos"
                   ></b-form-input>
                 </b-form-group>
@@ -116,6 +118,7 @@
                     id="contribucion_area"
                     v-model="publicacion.contribucion_area"
                     required
+                    type="text"
                     placeholder="Contribución al estado actual del área"
                   ></b-form-input>
                 </b-form-group>
@@ -140,6 +143,7 @@
                     id="ajusta_mision_udem"
                     v-model="publicacion.ajusta_mision_udem"
                     required
+                    type="text"
                     placeholder="Forma en que se ajusta a la misión de la udem"
                   ></b-form-input>
                 </b-form-group>
@@ -152,6 +156,7 @@
                     id="proyecto_asociado"
                     v-model="publicacion.proyecto_asociado"
                     required
+                    type="text"
                     placeholder="Datos del proyecto al que se asocia"
                   ></b-form-input>
                 </b-form-group>
@@ -164,6 +169,7 @@
                     id="observaciones_finales"
                     v-model="publicacion.observaciones_finales"
                     required
+                    type="text"
                     placeholder="Observaciones finales"
                   ></b-form-input>
                 </b-form-group>

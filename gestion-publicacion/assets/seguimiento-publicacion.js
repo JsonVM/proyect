@@ -8,17 +8,12 @@ export default {
     data() {
         return {
             enEdicion: false,
-
-            //Variable que guarda el id que se quiere eliminar
-            id_eliminar: 0,
-            id_actualizar: 0,
             //se guardan todos los seguimientos nuevos que se ingresan 
             seg: {
                 tarea: "",
                 id: "",
                 fecha: "",
                 comentario: "",
-                id_propuesta: "",
                 estado: null,
                 archivo:"",
                 acciones: true
@@ -26,7 +21,6 @@ export default {
             //se inicializa el array seguimientos para luego guardar todos los seguimientos ahi
             lista_seguimientos: [
                 {
-                    tarea: "01",
                     id: "1",
                     fecha: "04/03/2020",
                     comentario: "Buen trabajo en general",
@@ -35,7 +29,6 @@ export default {
                     acciones: true
                 },
                 {
-                    tarea: "02",
                     id: "",
                     fecha: "04/03/2020",
                     comentario: "Hay que realizar correcciones ortográficas",
@@ -100,7 +93,6 @@ export default {
                 id: "",
                 fecha: "",
                 comentario: "",
-                id_propuesta: "",
                 estado: null,
                 archivo: "",
                 acciones: true
@@ -139,7 +131,6 @@ export default {
               });
       
             this.seg = {
-                tarea: "",
                 id: "",
                 fecha: "",
                 comentario: "",
@@ -220,7 +211,6 @@ export default {
             this.enEdicion = false;
             this.lista_seguimientos.splice(seg1, 1, this.seg);
             this.seg = {
-                tarea: "",
                 id: "",
                 fecha: "",
                 comentario: "",
