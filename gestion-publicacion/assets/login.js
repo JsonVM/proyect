@@ -1,6 +1,26 @@
 import Axios from "axios";
 
+
+
 export default {
+  asyncData({ query }) {
+    let token = query.token; // Capturamos el token que llega por url
+    let token_url = token ? true : false; // Me indica si hay un token en url o no
+    return { token, token_url };
+  },
+  mounted() {
+    if (this.token_url == true) {
+      // Ingresa a este código si hay un token en url.
+
+      //Asigno la información del token al localstorage
+      localStorage.setItem("token", this.token);
+
+      //this.$router.push("PONER AQUÍ LA URL DE LA PÁGINA CUANDO SE REDIRECCION AL HACER LOGIN EXITOSO.");
+      // Por ejemplo
+      this.$router.push("info-publicacion");
+    }
+  },
+  
     data() {
         return {
           autor: {
@@ -36,6 +56,9 @@ export default {
         agregarInfoLS(item) {
             localStorage.setItem('Autor', JSON.stringify(item));
         },
+
+          // Función que se ejecuta antes de cargar el ciclo de vida de vue
+  
 
     }
 };
