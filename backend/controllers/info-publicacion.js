@@ -87,7 +87,7 @@ let guardarPublicacion = async (info_publicacion) => {
 
     sql=`INSERT INTO public.pu_autores_publicaciones(id_autor, id_publicacion)
     VALUES (
-      '${info_publicacion.autor}',
+      '${info_publicacion.id_autor}',
       '${info_publicacion.id}'
     );`;
 

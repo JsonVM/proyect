@@ -11,6 +11,7 @@ export default {
       publicacion: {
         id: "",
         titulo: "",
+        id_autor: "",
         autor: "",
         facultad: "",
         tipo_publicacion: "",
@@ -59,8 +60,10 @@ export default {
   methods: {
     //Para crear una nueva publicaciony agregarla a la BD
     crearPublicacion() {
+      this.publicacion.id_autor = localStorage.getItem("documento")
+      console.log(this.publicacion.id_autor)
       this.lista_publicaciones.push(this.publicacion);
-      localStorage.setItem('info-publicacion', JSON.stringify(this.lista_publicaciones));
+      //localStorage.setItem('info-publicacion', JSON.stringify(this.lista_publicaciones));
 
       let direccion = "http://localhost:3001/info-publicacion";
       axios
@@ -77,17 +80,20 @@ export default {
 
       this.publicacion = {
         id: "",
+        id_autor: "",
         titulo: "",
         facultad: "",
         tipo_publicacion: "",
         area: "",
         acciones: true
       };
+
     },
 
     //cargar todos los registros de la BD y listarlos
     cargar() {
-      let url = "http://localhost:3001/info-publicacion/"+1234;
+      let id_listar = localStorage.getItem("documento")
+      let url = "http://localhost:3001/info-publicacion/"+ id_listar;
       axios.get(url).then(respuesta => {
         let data = respuesta.data
         if (data.ok) {
