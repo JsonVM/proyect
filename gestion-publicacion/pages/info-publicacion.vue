@@ -183,11 +183,6 @@
               </b-card>
               -->
               <b-table responsive hover :items="lista_publicaciones" :fields="fields" head-variant="dark">
-                <template v-slot:cell(acciones)="row">
-                  <b-button size="sm" @click="cargarPublicacionEditar(row)" class="mr-2">Modificar</b-button>
-                  <b-button size="sm" @click="eliminarPublicacion(row)" class="mr-2">Eliminar</b-button>
-                  <b-button size="sm" @click="eliminarPublicacion(row)" class="mr-2">Generar pdf</b-button>
-                </template>
               </b-table>
 
               <b-form action="javascript:void(0)" @submit="cargarUnaPublicacion()">

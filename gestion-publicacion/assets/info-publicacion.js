@@ -17,7 +17,7 @@ export default {
         area: "",
         acciones: true
       },
-      fields: ["id", "titulo", "facultad", "tipo_publicacion", "area", "acciones"],
+      fields: ["id", "titulo", "facultad", "tipo_publicacion", "area", "estado"],
 
       //En este arreglo se meten todas las publicaciones
       lista_publicaciones: [
@@ -87,7 +87,7 @@ export default {
 
     //cargar todos los registros de la BD y listarlos
     cargar() {
-      let url = "http://localhost:3001/info-publicacion";
+      let url = "http://localhost:3001/info-publicacion/"+1234;
       axios.get(url).then(respuesta => {
         let data = respuesta.data
         if (data.ok) {
