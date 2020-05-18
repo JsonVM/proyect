@@ -24,8 +24,8 @@ export default {
     data() {
         return {
           autor: {
-              documento:"2020",
-              clave:"123"
+              documento:"",
+              clave:""
           },
           mensaje: null,
           reglas: [(v) => !!v || "El campo es obligatorio."],
