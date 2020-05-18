@@ -23,9 +23,10 @@ export default {
   
     data() {
         return {
+          title:"INICIAR SESIÓN",
           autor: {
-              documento:"2020",
-              clave:"123"
+              documento:"",
+              clave:"",
           },
           mensaje: null,
           reglas: [(v) => !!v || "El campo es obligatorio."],

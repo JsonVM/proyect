@@ -1,44 +1,63 @@
-
 <template>
-  <b-row align="center" justify="center">
-    <b-col cols="12" sm="8" md="4">
-      <!--Card login -->
-      <b-card class="elevation-12">
-        <b-card-title primary-title></b-card-title>
+  <div class="body">
+    <b-container>
+      <b-col>
+        <!-- Content here -->
 
-          <span>Iniciar sesión</span>
+        <div class="container_login">
+          <b-img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Escudo_Universidad_de_Medellin.svg/240px-Escudo_Universidad_de_Medellin.svg.png"
+            fluid
+            alt="Fluid image"
+            width="80px"
+          ></b-img>
+          <div class="title">{{ title }}</div>
+        </div>
 
-        <b-form ref="formularioLogin">
-  
-                <b-form-group id="id" label="Identificación" label-for="Identificacion">
-                <b-form-input
-                    id="documento"
-                    v-model="autor.documento"
-                    required
-                    placeholder="Cedula"
-                    :rules="reglas"
-                ></b-form-input>
+        <br />
 
-            </b-form-group>
-            <b-form-group id="in-nombre" label="Contraseña:" label-for="Contraseña">
+        <b-form action="javascript:void(0)">
+          <b-form-group @submit.stop.prevent label="Documento" label-for="id">
             <b-form-input
-            id="clave"
-            v-model="autor.clave"
-            type="password"
-            required
-            placeholder="Ingrese su contraseña"
-            :rules="reglas"></b-form-input>
-            </b-form-group> 
+              class="form-control"
+              v-model="autor.documento"
+              type="number"
+              placeholder="Ingrese su documento de identidad"
+              id="id"
+              :rules="reglas"
+            />
+          </b-form-group>
 
-          
+          <b-form-group
+            @submit.stop.prevent
+            label="Contraseña"
+            label-for="password"
+          >
+            <b-form-input
+              class="form-control"
+              type="password"
+              v-model="autor.clave"
+              placeholder="Ingrese su contraseña"
+              id="password"
+            />
+          </b-form-group>
+
+          <b-button @click="login()" type="submit" block variant="danger"
+            >Ingresar</b-button
+          >
+          <b-btn color="primary" class="text-none" href="registrar-autor" block variant="danger">Registrarse</b-btn>
+
           <span class="red--text py-2">{{ mensaje }}</span>
-          </b-form>
-        
-          
-          <b-btn color="primary" class="text-none" @click="login()">Ingresar</b-btn>
-          <b-btn color="primary" class="text-none" href="registrar-autor">Registrarse</b-btn>       
-      </b-card>
-    </b-col>
-  </b-row>
+          <div class="text">
+            <br />
+          </div>
+        </b-form>
+        <br />
+      </b-col>
+    </b-container>
+  </div>
 </template>
-<script src="../assets/login.js"/>
+
+<script src="../assets/login.js" />
+
+<style src="../css/index.css" />
