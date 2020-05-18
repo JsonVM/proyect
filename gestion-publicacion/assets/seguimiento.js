@@ -38,29 +38,6 @@ export default {
                 }
             ],
 
-            publicacion: {
-                id: "",
-                titulo: "",
-                autor: "",
-                facultad: "",
-                tipo_publicacion: "",
-                area: "",
-                acciones: true
-              },
-              fields2: ["id", "titulo", "autor" ,"acciones"],
-        
-              //En este arreglo se meten todas las publicaciones
-              lista_publicaciones: [
-                {
-                  id: "001",
-                  titulo: "Geometría",
-                  facultad: "Ciencias básicas",
-                  tipo_publicacion: "Cientifica",
-                  area: "Ciencias básicas",
-                  acciones: true
-                }
-            ],
-
             //esta lista es utilizada para guardar allí los datos que vamos a listar
             lista_mostrar: [
                 {
@@ -200,11 +177,6 @@ export default {
               console.log(respuesta);
             }).catch(error => {
               console.log(this.mensaje = "Ha ocurrido un error")});
-         
-
-            /*let se = this.lista_seguimientos.find(
-                seg => seg.tarea == item.tarea
-            );*/
 
             this.enEdicion = true;
             this.seg = Object.assign({}, se);
@@ -247,91 +219,6 @@ export default {
             //localStorage.setItem('seguimientos', JSON.stringify(this.lista_seguimientos));
         },
 
-        //cargar todos los registros de la BD y listarlos
-    cargar_publicaciones() {
-        let url = "http://localhost:3001/info-publicacion";
-        axios.get(url).then(respuesta => {
-          let data = respuesta.data
-          if (data.ok) {
-            this.lista_publicaciones = data.info
-          }
-          this.mensaje = data.mensaje;
-          console.log(respuesta);
-        }).catch(error => {
-          console.log(this.mensaje = "Ha ocurrido un error")
-        });
-  
-      },
-  
-      //cargar una publicacion para editarla 
-      cargarPublicacionEditar({ item }) {
-       let editar = this.lista_publicaciones.find(publicacion => publicacion.id == item.id);
-        this.enEdicion = true;
-        this.publicacion = Object.assign({}, editar);
-      },
-  
-      //agregar los nuevos valores a la publicacion editada
-      actualizarPublicacionBD() {
-        let id_Editar = this.publicacion.id;
-        console.log(this.id_editar)
-        let direccion = "http://localhost:3001/info-publicacion/" + id_Editar;
-        axios
-          .put(direccion, this.publicacion)
-          .then((response) => {
-            console.log("Propuesta editada correctamente");
-            alert("La propuesta se edito correctamente");
-            console.log(response);
-          })
-          .catch((error) => {
-            console.log(error);
-            alert("Lo sentimos, la publicacion no se pudo editar correctamente");
-          });
-  
-        this.publicacion = {
-          id: "",
-          titulo: "",
-          facultad: "",
-          tipo_publicacion: "",
-          area: "",
-          acciones: true
-        };
-      },
-  
-      //Actualiza los datos de una publicacion
-      actualizarPublicacion() {
-        let posicion = this.lista_publicaciones.findIndex(
-          publicacion => publicacion.titulo == this.publicacion.titulo
-        );
-        this.enEdicion = false;
-        this.lista_publicaciones.splice(posicion, 1, this.publicacion);
-        this.publicacion = {
-          id: "",
-          titulo: "",
-          autor: "",
-          facultad: "",
-          tipo_publicacion: "",
-          area: "",
-          acciones: true
-        };
-        localStorage.setItem('info-publicacion', JSON.stringify(this.lista_publicaciones));
-      },
-  
-      //eliminar publicacion de la BD
-      eliminarPublicacion({item}) {
-        let i = item.id;
-        let direccion = "http://localhost:3001/info-publicacion/" + i;
-        axios
-          .delete(direccion, i)
-          .then((response) => {
-            console.log("publicacion eliminada correctamente");
-            alert("Publicacion eliminada correctamente");
-            this.cargar();
-            console.log(response);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-        },  
         //metodo para guardar la lista de seguimientos en el local storage
         local() {
             var datosLocal = JSON.parse(localStorage.getItem('seguimientos'));

@@ -40,6 +40,10 @@ export default {
 
                     if (res) {
                         this.agregarInfoLS({ idautor: this.autor.documento, token: res.data['info'], nombre: res.data['nombre'] })
+                        console.log("hola")
+                
+                        console.log(this.autor.documento)
+                        localStorage.setItem('documento', this.autor.documento);
 
                     }
                     this.$router.push({ path: "info-publicacion", query: { nombre: res.data['nombre'] } });

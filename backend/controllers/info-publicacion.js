@@ -84,9 +84,19 @@ let guardarPublicacion = async (info_publicacion) => {
             '${info_publicacion.observaciones_finales}'
             );`;
     let respuesta = await _servicio.ejecutarSql(sql);
-    return respuesta;
+
+    sql=`INSERT INTO public.pu_autores_publicaciones(id_autor, id_publicacion)
+    VALUES (
+      '${info_publicacion.id_autor}',
+      '${info_publicacion.id}'
+    );`;
+
+    let respuesta2 = await _servicio.ejecutarSql(sql);
+
+    return respuesta + " " + respuesta2;
+
   } catch (error) {
-    throw { ok: false };
+    throw { ok: false, err: error};
   }
 };
 
@@ -94,7 +104,7 @@ let guardarPublicacion = async (info_publicacion) => {
 let consultarPublicaciones = async () => {
   try {
     let _servicio = new servicioPg();
-    let sql = `SELECT * from public.pu_propuestas_publicaciones`;
+    let sql = `SELECT id, titulo from public.pu_propuestas_publicaciones`;
     let respuesta = await _servicio.ejecutarSql(sql);
     return respuesta;
   } catch (error) {
@@ -107,7 +117,9 @@ let consultarPublicacion = async (id) => {
   try {
       console.log(id);
     let _servicio = new servicioPg();
-    let sql = `SELECT * FROM public.pu_propuestas_publicaciones WHERE id='${id}';`;
+    let sql = `select public.pu_propuestas_publicaciones.id, titulo,facultad,tipo_publicacion,area from public.pu_propuestas_publicaciones
+    inner join public.pu_autores_publicaciones on public.pu_propuestas_publicaciones.id = public.pu_autores_publicaciones.id_publicacion
+    where public.pu_autores_publicaciones.id_autor = '${id}';`;
     let respuesta = await _servicio.ejecutarSql(sql);
     //let resultado = respuesta.rows;
     return respuesta;

@@ -32,15 +32,6 @@
                   ></b-form-input>
                 </b-form-group>
 
-                <b-form-group id="input-group-2" label="Autor:" label-for="autor">
-                  <b-form-input
-                    id="autor"
-                    v-model="publicacion.autor"
-                    required
-                    placeholder="Ingrese el nombre del autor"
-                  ></b-form-input>
-                </b-form-group>
-
                 <b-form-group
                   id="input-group-3"
                   label="Facultad a la cual se inscribe:"
@@ -183,11 +174,6 @@
               </b-card>
               -->
               <b-table responsive hover :items="lista_publicaciones" :fields="fields" head-variant="dark">
-                <template v-slot:cell(acciones)="row">
-                  <b-button size="sm" @click="cargarPublicacionEditar(row)" class="mr-2">Modificar</b-button>
-                  <b-button size="sm" @click="eliminarPublicacion(row)" class="mr-2">Eliminar</b-button>
-                  <b-button size="sm" @click="eliminarPublicacion(row)" class="mr-2">Generar pdf</b-button>
-                </template>
               </b-table>
 
               <b-form action="javascript:void(0)" @submit="cargarUnaPublicacion()">
