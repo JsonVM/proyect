@@ -34,6 +34,24 @@ router.get("/info-publicacion/:id", (req, res) => {
 });
 
 /**
+ * Obtener una publicacion por id
+ */
+router.get("/info-publicacion/obtener/:id", (req, res) => {
+  let id = req.params.id;
+  console.log(id);
+  _controlador
+    .consultarPublicacionJ(id)
+    .then((respuestaDB) => {
+      let registros = respuestaDB.rows;
+      let mensaje = registros.length > 0 ? "Publicacion consultada." : "Sin registro.";
+      res.send({ ok: true, info: registros, mensaje });
+    })
+    .catch((error) => {
+      res.send(error);
+    });
+});
+
+/**
  * Guardando una publicacion
  */
 router.post("/info-publicacion", (req, res) => {

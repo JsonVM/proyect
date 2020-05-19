@@ -53,6 +53,17 @@ let consultarSeguimientos = async () => {
     }
 }
 
+let consultarSeguimiento = async (id) => {
+    try {
+        let _servicio = new servicioPg()
+        let sql = `SELECT * from public.pu_seguimientos_propuestas WHERE id ='${id}' `;
+        let respuesta = await _servicio.ejecutarSql(sql);
+        return respuesta;
+    } catch (error) {
+        throw{ok: false };
+    }
+}
+
 //Eliminando un seguimiento publicacion
 let eliminarSeguimiento = async (id) => {
     try{
@@ -94,4 +105,4 @@ let eliminarSeguimiento = async (id) => {
   };
 
 //exportando metodos en forma de JSON
-module.exports = { validarSeguimiento, guardarSeguimiento, consultarSeguimientos, eliminarSeguimiento, modificarSeguimiento };
+module.exports = { consultarSeguimiento, validarSeguimiento, guardarSeguimiento, consultarSeguimientos, eliminarSeguimiento, modificarSeguimiento };

@@ -22,7 +22,7 @@ router.get("/seguimiento-publicacion/:id", (req, res) => {
 
   let id = req.params.id;
   let seg = req.body;
-  _controlador.consultarSeguimientos().then(respuestaDB => {
+  _controlador.consultarSeguimiento(id).then(respuestaDB => {
       let registros = respuestaDB.rows;
       res.send({ ok: true, info: registros, mensaje: "seguimientos consultados" });
     }).catch(error => {

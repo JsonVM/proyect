@@ -263,6 +263,22 @@ export default {
   
       },
   
+      generarJsonDeSeguimiento({ item }){
+        let url = "http://localhost:3001/info-publicacion/obtener/"+item.id;
+        axios.get(url).then(respuesta => {
+          let data = respuesta.data
+          if (data.ok) {
+            let s = data.info;
+            console.log(s);
+            return s;
+          }
+          this.mensaje = data.mensaje;
+          console.log(respuesta);
+        }).catch(error => {
+          console.log(this.mensaje = "Ha ocurrido un error")
+        });
+      },
+
       //cargar una publicacion para editarla 
       cargarPublicacionEditar({ item }) {
        let editar = this.lista_publicaciones.find(publicacion => publicacion.id == item.id);
