@@ -49,8 +49,20 @@ export default {
                         localStorage.setItem('documento', this.autor.documento);
 
                     }
-                    let id_listar = localStorage.getItem("documento");
-                    let rol = this.verificarRol(id_listar);
+                    //let id_listar = localStorage.getItem("documento");
+                    //let rol = this.verificarRol(localStorage.getItem("documento"));
+
+                    //-------------------------------------
+
+                    let direccion = "http://localhost:3001/registro-autor/rol/"+localStorage.getItem("documento");
+                    let token = localStorage.getItem("token");
+                    Axios.get(direccion,{headers:{token}}).then(respuesta => {
+                      let data = respuesta.data
+                      console.log(data);
+                      if (data.ok) {
+                        let rol = data.info[0].rol;
+                        console.log("i!!" + rol);
+                        console.log("ROL: "+ rol);
                       if(rol == 6){
                       this.$router.push("info-publicacion");
                       } else if(rol == 2){
@@ -59,6 +71,15 @@ export default {
                     //this.$router.push({ path: "info-publicacion", query: { nombre: res.data['nombre'] } });
                     console.log(res)
                     localStorage.setItem('token', res.data.info);
+                      }
+                      this.mensaje = data.mensaje;
+                      console.log(respuesta);
+                    }).catch(error => {
+                      console.log(this.mensaje = "Ha ocurrido un error: " + error)
+                    })
+
+                    //---------------------
+                    
                 })
                 .catch((error) => {
                     console.log(error.response);
@@ -72,11 +93,14 @@ export default {
 
         verificarRol(id){
           let direccion = "http://localhost:3001/registro-autor/rol/"+id;
-          axios.get(direccion).then(respuesta => {
+          let token = localStorage.getItem("token");
+          Axios.get(direccion,{headers:{token}}).then(respuesta => {
             let data = respuesta.data
+            console.log(data);
             if (data.ok) {
-              let i = data.info;
-              return i[0].rol;
+              let i = data.info[0].rol;
+              console.log("i!!" + i);
+              return i;
             }
             this.mensaje = data.mensaje;
             console.log(respuesta);
