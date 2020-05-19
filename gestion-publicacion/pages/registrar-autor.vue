@@ -77,7 +77,7 @@
             </b-form-group>
             
             <b-button type="submit" variant="primary" v-if="!enEdicion">Registrar</b-button>
-            <b-button type="submit" variant="primary" href="principal" v-if="!enEdicion">Ir a la pagína principal</b-button>
+            <b-button type="submit" href = "http://localhost:3000" variant="primary">Salir</b-button>
        
       </b-form>    
     </b-card-body>

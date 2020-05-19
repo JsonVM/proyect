@@ -43,6 +43,7 @@ let consultarPersona = async (persona) => {
 let generarToken = (persona) => {
   delete persona.clave;
   let token = jwt.sign(persona, SECRET_KEY, { expiresIn: "5h" });
+  
   return token;
 };
 
