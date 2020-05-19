@@ -48,6 +48,8 @@ export default {
 
                     }
                     this.$router.push({ path: "info-publicacion", query: { nombre: res.data['nombre'] } });
+                    console.log(res)
+                    localStorage.setItem('token', res.data.info);
                 })
                 .catch((error) => {
                     console.log(error.response);

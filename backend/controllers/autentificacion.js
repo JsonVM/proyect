@@ -42,7 +42,7 @@ let consultarPersona = async (persona) => {
 
 let generarToken = (persona) => {
   delete persona.clave;
-  let token = jwt.sign(persona, SECRET_KEY, { expiresIn: "1h" });
+  let token = jwt.sign(persona, SECRET_KEY, { expiresIn: "5h" });
   return token;
 };
 
@@ -59,7 +59,7 @@ let verificarAut = (req, res) => {
       let verificacion = autenticacion.verificarToken(token);
       res.status(200).send({
           ok: true,
-          info: verificacion,
+          info: token,
           mensaje: "Autenticado.",
       });
   } catch (error) {

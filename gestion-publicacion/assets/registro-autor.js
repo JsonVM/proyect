@@ -43,9 +43,11 @@ export default {
     methods: {
         guardarAutor() {
             let direccion = "http://localhost:3001/registro-autor";
+            let token = localStorage.getItem("token");
+            
             console.log(this.autor)
             axios
-                .post(direccion, this.autor)
+                .post(direccion, this.autor, {headers: {token}})
                 .then((response) => {
                     console.log(this.autor) 
                 console.log("Autor agregado correctamente");
