@@ -16,6 +16,20 @@ router.get("/registro-autor", (req, res) => {
 });
 
 /**
+ * Obteniendo rol de autor
+ */
+router.get("/registro-autor/rol/:id", (req, res) => {
+
+  let id = req.params.id;
+  _controlador.consultarRolAutor(id).then(respuestaDB => {
+      let registros = respuestaDB.rows;
+      res.send({ ok: true, info: registros, mensaje: "Rol de usuario consultado" });
+    }).catch(error => {
+      res.send(error);
+    });
+});
+
+/**
  * Guardando una autor
  */
 router.post("/registro-autor", (req, res) => {

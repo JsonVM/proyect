@@ -85,11 +85,11 @@ let guardarAutor = async (autor)=> {
     }
 }
 
-//Consultando la info de los autores
-let consultarAutor = async () => {
+//Consultando rol de autor
+let consultarRolAutor = async (id) => {
     try {
         let _servicio = new servicioPg()
-        let sql = `SELECT * from public.acc_usuarios`;
+        let sql = `SELECT rol from public.acc_usuarios WHERE id = '${id}'`;
         let respuesta = await _servicio.ejecutarSql(sql);
         return respuesta;
     } catch (error) {
@@ -98,4 +98,4 @@ let consultarAutor = async () => {
 }
 
 //exportando metodos en forma de JSON
-module.exports = {validarAutor, guardarAutor, consultarAutor};
+module.exports = {validarAutor, guardarAutor, consultarRolAutor};
